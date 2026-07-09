@@ -3,1397 +3,665 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Стандарт сервиса и техника продаж — Казахтелеком</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Стандарт сервиса и техника продаж</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
   :root{
-    --color-primary:#0B5FCE;
-    --color-primary-dark:#083E8C;
-    --color-primary-tint:#EAF1FD;
-    --color-accent:#FF7A1A;
-    --color-accent-tint:#FFEFE1;
-    --color-bg:#F4F6FA;
-    --color-surface:#FFFFFF;
-    --color-text:#1B2430;
-    --color-text-muted:#616B7A;
-    --color-border:#E3E7EE;
-    --color-good:#1CA94C;
-    --color-good-tint:#E7F8ED;
-    --color-mid:#C98A00;
-    --color-mid-tint:#FEF3DE;
-    --color-bad:#DE3B33;
-    --color-bad-tint:#FCE9E8;
-    --radius-sm:8px;
-    --radius-md:14px;
-    --radius-lg:22px;
-    --shadow-card:0 4px 24px rgba(20,30,60,0.07);
-    --shadow-fab:0 8px 24px rgba(11,95,206,0.35);
-    --font-heading:'Golos Text', 'Inter', sans-serif;
-    --font-body:'Inter', sans-serif;
-    --transition-fast:150ms ease;
-    --transition-med:280ms ease;
+    --bg: #F5F8F8;
+    --surface: #FFFFFF;
+    --ink: #10262F;
+    --ink-soft: #52707A;
+    --accent: #0E8C82;
+    --accent-deep: #0B655F;
+    --accent-tint: #E3F2F0;
+    --warn: #E8A33D;
+    --warn-tint: #FBEEDB;
+    --danger: #C24B4B;
+    --danger-tint: #FBE9E9;
+    --line: #DCE6E6;
+    --radius: 16px;
+    --maxw: 720px;
+    --maxw-admin: 980px;
   }
-
-  *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
   body{
-    margin:0;
-    font-family:var(--font-body);
-    color:var(--color-text);
-    background:var(--color-bg);
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
+    margin:0; background: var(--bg); color: var(--ink);
+    font-family:'Inter',-apple-system,sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;
   }
-  h1,h2,h3{ font-family:var(--font-heading); font-weight:700; margin:0 0 12px; color:var(--color-text); }
-  p{ margin:0 0 12px; }
-  ul{ margin:0; padding:0; list-style:none; }
-  button{ font-family:inherit; }
-  input{ font-family:inherit; }
+  h1,h2,h3{ font-family:'Golos Text','Inter',sans-serif; margin:0 0 12px; color:var(--ink); letter-spacing:-0.01em; }
+  p{ margin:0 0 14px; color:var(--ink-soft); }
+  .wrap{ max-width: var(--maxw); margin:0 auto; padding: 0 20px; }
 
-  a{ color:var(--color-primary); }
+  /* ---------- Прогресс-бар ---------- */
+  .progress-bar{ position:sticky; top:0; z-index:50; background:rgba(245,248,248,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); padding:10px 0; }
+  .progress-inner{ max-width:var(--maxw); margin:0 auto; padding:0 20px; display:flex; align-items:center; gap:14px; }
+  .progress-track{ flex:1; display:flex; gap:6px; }
+  .progress-seg{ flex:1; height:6px; border-radius:4px; background:var(--line); overflow:hidden; position:relative; }
+  .progress-seg i{ display:block; height:100%; width:0%; background:var(--accent); transition:width .25s ease; }
+  .progress-time{ font-size:13px; font-weight:600; color:var(--accent-deep); white-space:nowrap; min-width:92px; text-align:right; }
 
-  :focus-visible{
-    outline:3px solid var(--color-accent);
-    outline-offset:2px;
-    border-radius:4px;
-  }
+  section{ padding: 56px 0 48px; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
 
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
-    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
-  }
+  .eyebrow{ display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:700; color:var(--accent-deep); background:var(--accent-tint); padding:6px 14px; border-radius:100px; margin-bottom:18px; letter-spacing:.02em; }
 
-  /* ---------- Progress bar ---------- */
-  .progress-bar{
-    position:fixed;
-    top:0; left:0; right:0;
-    z-index:40;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 16px;
-    background:rgba(255,255,255,0.92);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--color-border);
-  }
-  .progress-segments{
-    display:flex;
-    gap:6px;
-    flex:1 1 auto;
-    max-width:480px;
-  }
-  .progress-segment{
-    flex:1 1 0;
-    height:6px;
-    background:var(--color-border);
-    border-radius:4px;
-    overflow:hidden;
-  }
-  .progress-segment .fill{
-    display:block;
-    height:100%;
-    width:0%;
-    background:var(--color-primary);
-    transition:width var(--transition-fast);
-  }
-  .progress-time{
-    flex:0 0 auto;
-    font-size:12.5px;
-    color:var(--color-text-muted);
-    white-space:nowrap;
-  }
+  .hero{ padding:64px 0 40px; border-bottom:1px solid var(--line); }
+  .hero h1{ font-size:34px; line-height:1.15; font-weight:800; }
+  .hero .lead{ font-size:16px; color:var(--ink-soft); max-width:54ch; }
+  .hero-meta{ display:flex; gap:18px; margin:22px 0 26px; flex-wrap:wrap; }
+  .meta-chip{ display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--ink); background:var(--surface); border:1px solid var(--line); padding:8px 14px; border-radius:100px; }
+  .meta-chip svg{ width:15px; height:15px; stroke:var(--accent-deep); flex-shrink:0; }
 
-  /* ---------- Layout ---------- */
-  #trainingView{
-    padding-top:52px;
-  }
-  .block{
-    max-width:760px;
-    margin:0 auto;
-    padding:56px 20px;
-  }
-  .block-hero{
-    padding-top:40px;
-    padding-bottom:44px;
-  }
-  .block-heading{
-    display:flex;
-    align-items:baseline;
-    gap:10px;
-    margin-bottom:6px;
-  }
-  .block-number{
-    font-size:13px;
-    font-weight:700;
-    color:var(--color-primary);
-    background:var(--color-primary-tint);
-    padding:4px 10px;
-    border-radius:999px;
-    letter-spacing:0.02em;
-  }
-  .block-lead{
-    color:var(--color-text-muted);
-    margin-bottom:22px;
-  }
-  .block + .block{
-    border-top:1px solid var(--color-border);
-  }
+  .name-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px; margin-bottom:24px; }
+  .name-card label{ display:block; font-size:13px; font-weight:700; color:var(--ink); margin-bottom:8px; }
+  .name-card input{ width:100%; font-family:'Inter'; font-size:15px; padding:12px 14px; border:1.5px solid var(--line); border-radius:10px; outline:none; color:var(--ink); transition:border-color .15s ease; }
+  .name-card input:focus{ border-color:var(--accent); }
+  .name-card .hint{ font-size:12px; color:var(--ink-soft); margin-top:8px; margin-bottom:0; }
 
-  .steps-preview{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:10px;
-    margin:24px 0 28px;
-  }
-  .steps-preview .step-badge{
-    background:var(--color-surface);
-    border:1px solid var(--color-border);
-    border-radius:var(--radius-md);
-    padding:14px 10px;
-    text-align:center;
-    font-size:13px;
-    color:var(--color-text-muted);
-    box-shadow:var(--shadow-card);
-  }
-  .steps-preview .step-badge strong{
-    display:block;
-    font-family:var(--font-heading);
-    color:var(--color-text);
-    font-size:20px;
-    margin-bottom:4px;
-  }
+  .btn{ display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:#fff; font-family:'Inter'; font-weight:700; font-size:15px; padding:14px 26px; border-radius:100px; border:none; cursor:pointer; text-decoration:none; transition:background .15s ease, transform .15s ease; }
+  .btn:hover{ background:var(--accent-deep); transform:translateY(-1px); }
+  .btn:disabled{ background:var(--line); color:var(--ink-soft); cursor:not-allowed; transform:none; }
+  .btn svg{ width:16px; height:16px; }
+  .btn-ghost{ background:var(--surface); color:var(--ink); border:1px solid var(--line); }
+  .btn-ghost:hover{ background:var(--surface); border-color:var(--accent); transform:none; }
 
-  .field-group{
-    margin:26px 0 20px;
-    max-width:420px;
-  }
-  .field-group label{
-    display:block;
-    font-weight:600;
-    margin-bottom:8px;
-    font-size:14px;
-  }
-  .field-group input[type="text"]{
-    width:100%;
-    padding:13px 14px;
-    border:1.5px solid var(--color-border);
-    border-radius:var(--radius-sm);
-    font-size:15px;
-    background:var(--color-surface);
-    transition:border-color var(--transition-fast);
-  }
-  .field-group input[type="text"]:focus{
-    border-color:var(--color-primary);
-  }
-  .field-group input.invalid{
-    border-color:var(--color-bad);
-  }
-  .field-hint{
-    color:var(--color-bad);
-    font-size:13px;
-    margin-top:6px;
-  }
+  .checklist{ list-style:none; padding:0; margin:22px 0 0; }
+  .check-item{ display:flex; align-items:flex-start; gap:14px; padding:16px 4px; border-bottom:1px solid var(--line); cursor:pointer; user-select:none; }
+  .check-item:last-child{ border-bottom:none; }
+  .check-box{ flex-shrink:0; width:24px; height:24px; border-radius:7px; border:2px solid var(--line); background:var(--surface); display:flex; align-items:center; justify-content:center; margin-top:2px; transition:all .15s ease; }
+  .check-box svg{ width:14px; height:14px; opacity:0; transform:scale(.6); transition:all .15s ease; stroke:#fff; }
+  .check-item.done .check-box{ background:var(--accent); border-color:var(--accent); }
+  .check-item.done .check-box svg{ opacity:1; transform:scale(1); }
+  .check-item.done .check-text{ color:var(--ink-soft); text-decoration:line-through; text-decoration-color:var(--line); }
+  .check-text{ font-size:15px; font-weight:500; color:var(--ink); }
+  .check-text b{ color:var(--ink); font-weight:700; }
+  .checklist-status{ margin-top:20px; display:flex; align-items:center; gap:10px; font-size:14px; font-weight:600; color:var(--ink-soft); }
+  .checklist-status.complete{ color:var(--accent-deep); }
+  .checklist-status .dot{ width:8px; height:8px; border-radius:50%; background:var(--line); }
+  .checklist-status.complete .dot{ background:var(--accent); }
 
-  .btn{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    border:none;
-    border-radius:999px;
-    padding:13px 26px;
-    font-size:15px;
-    font-weight:600;
-    cursor:pointer;
-    transition:transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
-  }
-  .btn:active{ transform:scale(0.97); }
-  .btn-primary{
-    background:var(--color-primary);
-    color:#fff;
-    box-shadow:0 6px 18px rgba(11,95,206,0.28);
-  }
-  .btn-primary:hover{ background:var(--color-primary-dark); }
-  .btn-primary:disabled{
-    opacity:0.6;
-    cursor:not-allowed;
-  }
-  .btn-ghost{
-    background:transparent;
-    color:var(--color-primary);
-    border:1.5px solid var(--color-border);
-  }
-  .btn-ghost:hover{ border-color:var(--color-primary); }
+  .steps{ margin-top:22px; display:flex; flex-direction:column; gap:10px; }
+  .step{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
+  .step-head{ display:flex; align-items:center; gap:14px; padding:16px 18px; cursor:pointer; }
+  .step-num{ flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--accent-tint); color:var(--accent-deep); font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .step.active .step-num{ background:var(--accent); color:#fff; }
+  .step-title{ font-weight:700; font-size:15px; flex:1; color:var(--ink); }
+  .step-chevron{ width:18px; height:18px; stroke:var(--ink-soft); flex-shrink:0; transition:transform .2s ease; }
+  .step.active .step-chevron{ transform:rotate(180deg); }
+  .step-body{ max-height:0; overflow:hidden; transition:max-height .25s ease; }
+  .step.active .step-body{ max-height:400px; }
+  .step-body-inner{ padding:0 18px 18px 62px; font-size:14px; }
+  .step-body-inner p{ margin-bottom:8px; }
+  .phrase{ background:var(--accent-tint); border-left:3px solid var(--accent); padding:10px 14px; border-radius:8px; font-size:13px; color:var(--accent-deep); font-style:italic; margin-top:10px; }
 
-  /* ---------- Checklist ---------- */
-  .checklist-counter{
-    display:inline-block;
-    background:var(--color-primary-tint);
-    color:var(--color-primary-dark);
-    font-weight:600;
-    font-size:14px;
-    padding:8px 16px;
-    border-radius:999px;
-    margin-bottom:18px;
-  }
-  .checklist{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-  }
-  .checklist-item{
-    display:flex;
-    align-items:flex-start;
-    gap:14px;
-    background:var(--color-surface);
-    border:1.5px solid var(--color-border);
-    border-radius:var(--radius-md);
-    padding:16px 18px;
-    cursor:pointer;
-    text-align:left;
-    width:100%;
-    transition:border-color var(--transition-fast), background var(--transition-fast);
-  }
-  .checklist-item:hover{ border-color:var(--color-primary); }
-  .checklist-item .check-box{
-    flex:0 0 auto;
-    width:24px; height:24px;
-    border-radius:7px;
-    border:2px solid var(--color-border);
-    display:flex; align-items:center; justify-content:center;
-    color:#fff;
-    font-size:14px;
-    transition:all var(--transition-fast);
-    margin-top:1px;
-  }
-  .checklist-item.done{
-    background:var(--color-good-tint);
-    border-color:var(--color-good);
-  }
-  .checklist-item.done .check-box{
-    background:var(--color-good);
-    border-color:var(--color-good);
-  }
-  .checklist-item .item-text{ font-size:15px; }
+  .cards{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:22px; }
+  .card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px; }
+  .card svg{ width:22px; height:22px; stroke:var(--accent-deep); margin-bottom:10px; }
+  .card h3{ font-size:15px; margin-bottom:6px; }
+  .card p{ font-size:13px; margin:0; }
 
-  /* ---------- Accordion ---------- */
-  .accordion{ display:flex; flex-direction:column; gap:10px; }
-  .accordion-item{
-    background:var(--color-surface);
-    border:1.5px solid var(--color-border);
-    border-radius:var(--radius-md);
-    overflow:hidden;
-  }
-  .accordion-header{
-    width:100%;
-    display:flex;
-    align-items:center;
-    gap:14px;
-    padding:16px 18px;
-    background:transparent;
-    border:none;
-    cursor:pointer;
-    text-align:left;
-    font-size:15.5px;
-    font-weight:600;
-    color:var(--color-text);
-  }
-  .accordion-header .step-num{
-    flex:0 0 auto;
-    width:30px; height:30px;
-    border-radius:50%;
-    background:var(--color-primary-tint);
-    color:var(--color-primary-dark);
-    display:flex; align-items:center; justify-content:center;
-    font-size:14px; font-weight:700;
-  }
-  .accordion-header .chev{
-    margin-left:auto;
-    transition:transform var(--transition-fast);
-    color:var(--color-text-muted);
-  }
-  .accordion-item.open .chev{ transform:rotate(180deg); }
-  .accordion-panel{
-    max-height:0;
-    overflow:hidden;
-    transition:max-height var(--transition-med);
-  }
-  .accordion-item.open .accordion-panel{ max-height:320px; }
-  .accordion-panel-inner{
-    padding:0 18px 18px 62px;
-    color:var(--color-text-muted);
-    font-size:14.5px;
-  }
-  .accordion-panel-inner .example{
-    margin-top:10px;
-    background:var(--color-accent-tint);
-    border-left:3px solid var(--color-accent);
-    padding:10px 14px;
-    border-radius:0 var(--radius-sm) var(--radius-sm) 0;
-    color:var(--color-text);
-    font-style:italic;
-  }
-
-  /* ---------- Cards grid (retention) ---------- */
-  .cards-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
-  }
-  .info-card{
-    background:var(--color-surface);
-    border:1.5px solid var(--color-border);
-    border-radius:var(--radius-md);
-    padding:20px;
-    box-shadow:var(--shadow-card);
-  }
-  .info-card .icon{
-    font-size:26px;
-    margin-bottom:10px;
-    display:block;
-  }
-  .info-card h3{ font-size:16px; margin-bottom:6px; }
-  .info-card p{ font-size:14px; color:var(--color-text-muted); margin:0; }
-
-  /* ---------- Quiz ---------- */
-  .quiz-question{
-    background:var(--color-surface);
-    border:1.5px solid var(--color-border);
-    border-radius:var(--radius-md);
-    padding:20px;
-    margin-bottom:14px;
-  }
-  .quiz-question h3{
-    font-size:15.5px;
-    margin-bottom:14px;
-  }
+  .quiz{ margin-top:22px; display:flex; flex-direction:column; gap:14px; }
+  .quiz-item{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px; }
+  .quiz-q{ font-weight:700; font-size:14px; margin-bottom:12px; color:var(--ink); }
   .quiz-options{ display:flex; flex-direction:column; gap:8px; }
-  .quiz-option{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    width:100%;
-    text-align:left;
-    padding:12px 14px;
-    border:1.5px solid var(--color-border);
-    border-radius:var(--radius-sm);
-    background:var(--color-surface);
-    cursor:pointer;
-    font-size:14.5px;
-    transition:border-color var(--transition-fast), background var(--transition-fast);
-  }
-  .quiz-option:hover:not(:disabled){ border-color:var(--color-primary); }
+  .quiz-option{ text-align:left; font-family:'Inter'; font-size:13.5px; padding:11px 14px; border:1.5px solid var(--line); background:var(--surface); border-radius:10px; cursor:pointer; color:var(--ink); transition:all .15s ease; }
+  .quiz-option:hover:not(:disabled){ border-color:var(--accent); }
   .quiz-option:disabled{ cursor:default; }
-  .quiz-option .letter{
-    flex:0 0 auto;
-    width:22px; height:22px;
-    border-radius:50%;
-    background:var(--color-bg);
-    display:flex; align-items:center; justify-content:center;
-    font-size:12px; font-weight:700;
-    color:var(--color-text-muted);
-  }
-  .quiz-option.correct{
-    background:var(--color-good-tint);
-    border-color:var(--color-good);
-  }
-  .quiz-option.correct .letter{ background:var(--color-good); color:#fff; }
-  .quiz-option.incorrect{
-    background:var(--color-bad-tint);
-    border-color:var(--color-bad);
-  }
-  .quiz-option.incorrect .letter{ background:var(--color-bad); color:#fff; }
+  .quiz-option.correct{ background:var(--accent-tint); border-color:var(--accent); color:var(--accent-deep); font-weight:600; }
+  .quiz-option.wrong{ background:var(--danger-tint); border-color:var(--danger); color:var(--danger); }
 
-  /* ---------- Results ---------- */
-  .results-card{
-    background:var(--color-surface);
-    border:1.5px solid var(--color-border);
-    border-radius:var(--radius-lg);
-    padding:26px;
-    margin-top:26px;
-    box-shadow:var(--shadow-card);
-  }
-  .results-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:14px;
-    margin:18px 0 22px;
-  }
-  .results-grid .stat{
-    text-align:center;
-    padding:14px 8px;
-    border-radius:var(--radius-md);
-    background:var(--color-bg);
-  }
-  .results-grid .stat .value{
-    font-family:var(--font-heading);
-    font-size:24px;
-    font-weight:700;
-  }
-  .results-grid .stat .label{
-    font-size:12.5px;
-    color:var(--color-text-muted);
-    margin-top:4px;
-  }
-  .submit-status{
-    margin-top:14px;
-    font-size:14px;
-    min-height:20px;
-  }
-  .submit-status.success{ color:var(--color-good); }
-  .submit-status.error{ color:var(--color-bad); }
-  .submit-status.pending{ color:var(--color-text-muted); }
+  .results-card{ margin-top:26px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:22px 24px; }
+  .results-row{ display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--line); font-size:14px; }
+  .results-row:last-of-type{ border-bottom:none; }
+  .results-row span:first-child{ color:var(--ink-soft); }
+  .results-row b{ color:var(--ink); }
+  .submit-row{ margin-top:18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  .submit-status{ font-size:13px; font-weight:600; color:var(--ink-soft); }
+  .submit-status.ok{ color:var(--accent-deep); }
+  .submit-status.err{ color:var(--danger); }
 
-  footer.page-footer{
-    text-align:center;
-    padding:30px 20px 90px;
-    color:var(--color-text-muted);
-    font-size:13px;
-  }
-  footer.page-footer a{
-    color:var(--color-text-muted);
-    text-decoration:underline;
-    cursor:pointer;
-  }
+  footer{ padding:30px 0 50px; text-align:center; font-size:12px; color:var(--ink-soft); }
+  .footer-admin-link{ color:var(--ink-soft); text-decoration:underline; cursor:pointer; background:none; border:none; font-size:12px; font-family:'Inter'; padding:0; }
 
-  /* ---------- FAB ---------- */
-  .fab{
-    position:fixed;
-    right:22px;
-    bottom:22px;
-    width:52px; height:52px;
-    border-radius:50%;
-    background:var(--color-primary);
-    color:#fff;
-    border:none;
-    font-size:20px;
-    display:flex; align-items:center; justify-content:center;
-    cursor:pointer;
-    box-shadow:var(--shadow-fab);
-    z-index:50;
-    transition:transform var(--transition-fast);
+  .admin-fab{
+    position: fixed; bottom: 22px; right: 22px; z-index: 60;
+    width: 50px; height: 50px; border-radius: 50%;
+    background: var(--ink); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 14px rgba(16,38,47,0.28);
+    transition: transform .15s ease, background .15s ease;
   }
-  .fab:hover{ transform:translateY(-2px); }
+  .admin-fab:hover{ background: var(--accent-deep); transform: translateY(-2px); }
+  .admin-fab svg{ width: 20px; height: 20px; stroke: #fff; }
+  .admin-fab-label{
+    position: fixed; bottom: 34px; right: 82px; z-index: 60;
+    background: var(--ink); color:#fff; font-size:12px; font-weight:600;
+    padding: 7px 12px; border-radius: 8px; white-space: nowrap;
+    opacity: 0; pointer-events:none; transition: opacity .15s ease;
+  }
+  .admin-fab:hover + .admin-fab-label, .admin-fab-label.show{ opacity: 1; }
+  @media (max-width:560px){ .admin-fab-label{ display:none; } }
 
-  /* ---------- Admin login modal ---------- */
-  .modal-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(20,30,50,0.45);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    z-index:60;
-  }
-  .modal-card{
-    background:var(--color-surface);
-    border-radius:var(--radius-lg);
-    padding:26px;
-    width:100%;
-    max-width:360px;
-    box-shadow:var(--shadow-card);
-  }
-  .modal-card h3{ font-size:17px; margin-bottom:4px; }
-  .modal-card .field-group{ margin:18px 0 6px; max-width:none; }
-  .modal-actions{
-    display:flex;
-    justify-content:flex-end;
-    gap:10px;
-    margin-top:18px;
-  }
+  /* ---------- АДМИН-ПАНЕЛЬ ---------- */
+  #adminView{ display:none; }
+  .admin-wrap{ max-width:var(--maxw-admin); margin:0 auto; padding:32px 20px 60px; }
+  .admin-top{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:26px; }
+  .admin-top p{ margin:0; color:var(--ink-soft); font-size:14px; }
+  .admin-top h1{ font-size:26px; }
+  .admin-actions{ display:flex; gap:10px; }
+  .icon-btn{ display:inline-flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--line); color:var(--ink); font-family:'Inter'; font-weight:700; font-size:13px; padding:10px 16px; border-radius:100px; cursor:pointer; text-decoration:none; }
+  .icon-btn:hover{ border-color:var(--accent); }
+  .icon-btn svg{ width:14px; height:14px; stroke:var(--accent-deep); }
 
-  /* ---------- Admin view ---------- */
-  #adminView{
-    max-width:1080px;
-    margin:0 auto;
-    padding:32px 20px 60px;
-  }
-  .admin-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:14px;
-    margin-bottom:26px;
-  }
-  .admin-header h1{ font-size:22px; margin:0; }
-  .admin-actions{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:26px; }
+  .stat{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px; }
+  .stat .label{ font-size:12px; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.03em; margin-bottom:8px; }
+  .stat .value{ font-size:26px; font-weight:800; font-family:'Golos Text'; }
+  .stat .value.accent{ color:var(--accent-deep); }
 
-  .admin-banner{
-    background:var(--color-mid-tint);
-    color:var(--color-mid);
-    border:1px solid var(--color-mid);
-    border-radius:var(--radius-sm);
-    padding:12px 16px;
-    font-size:13.5px;
-    margin-bottom:20px;
-  }
-  .admin-banner code{
-    background:rgba(0,0,0,0.06);
-    padding:1px 5px;
-    border-radius:4px;
-  }
+  .toolbar{ display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+  .search{ flex:1; min-width:200px; font-family:'Inter'; font-size:14px; padding:10px 14px; border:1.5px solid var(--line); border-radius:10px; outline:none; }
+  .search:focus{ border-color:var(--accent); }
 
-  .stat-cards{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:14px;
-    margin-bottom:24px;
-  }
-  .stat-card{
-    background:var(--color-surface);
-    border:1.5px solid var(--color-border);
-    border-radius:var(--radius-md);
-    padding:18px;
-    box-shadow:var(--shadow-card);
-  }
-  .stat-card .value{
-    font-family:var(--font-heading);
-    font-size:28px;
-    font-weight:700;
-    color:var(--color-primary-dark);
-  }
-  .stat-card .label{
-    font-size:13px;
-    color:var(--color-text-muted);
-    margin-top:4px;
-  }
+  .table-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
+  table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  th{ text-align:left; padding:14px 16px; background:var(--accent-tint); color:var(--accent-deep); font-size:12px; text-transform:uppercase; letter-spacing:.03em; font-weight:700; cursor:pointer; white-space:nowrap; }
+  td{ padding:13px 16px; border-top:1px solid var(--line); vertical-align:middle; }
+  tr:hover td{ background:#FAFCFC; }
+  .pill{ display:inline-flex; align-items:center; padding:3px 10px; border-radius:100px; font-size:12px; font-weight:700; }
+  .pill.good{ background:var(--accent-tint); color:var(--accent-deep); }
+  .pill.mid{ background:var(--warn-tint); color:#96661C; }
+  .pill.bad{ background:var(--danger-tint); color:var(--danger); }
+  .empty, .loading{ text-align:center; padding:60px 20px; color:var(--ink-soft); font-size:14px; }
+  .config-note{ background:var(--warn-tint); border:1px solid #EBD3A4; color:#7A5417; border-radius:var(--radius); padding:16px 18px; font-size:13px; margin-bottom:22px; }
+  .config-note code{ background:#fff; padding:2px 6px; border-radius:6px; font-size:12px; }
 
-  .admin-toolbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:12px;
-    margin-bottom:14px;
-  }
-  .search-input{
-    padding:10px 14px;
-    border:1.5px solid var(--color-border);
-    border-radius:var(--radius-sm);
-    font-size:14px;
-    min-width:220px;
-    background:var(--color-surface);
-  }
+  /* ---------- Экран входа для админа ---------- */
+  #adminGate{ display:none; min-height:100vh; align-items:center; justify-content:center; padding:20px; }
+  .gate-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:32px 28px; max-width:360px; width:100%; text-align:center; }
+  .gate-card h2{ font-size:19px; margin-bottom:8px; }
+  .gate-card p{ font-size:13px; margin-bottom:18px; }
+  .gate-card input{ width:100%; font-family:'Inter'; font-size:17px; font-weight:600; letter-spacing:.05em; padding:14px 14px; border:2px solid var(--ink-soft); border-radius:10px; outline:none; text-align:center; margin-bottom:14px; background:#fff; color:var(--ink); cursor:text; }
+  .gate-card input:focus{ border-color:var(--accent); box-shadow: 0 0 0 3px var(--accent-tint); }
+  .gate-card input::placeholder{ color:#9AAAAF; font-weight:400; }
+  .gate-error{ font-size:12.5px; color:var(--danger); margin-bottom:10px; min-height:16px; }
 
-  .table-wrap{
-    background:var(--color-surface);
-    border:1.5px solid var(--color-border);
-    border-radius:var(--radius-md);
-    overflow-x:auto;
-    box-shadow:var(--shadow-card);
+  @media (max-width:560px){
+    .hero h1{ font-size:27px; }
+    .cards{ grid-template-columns:1fr; }
+    section{ padding:42px 0 36px; }
+    .step-body-inner{ padding-left:18px; }
+    .progress-time{ min-width:70px; font-size:12px; }
   }
-  table.results-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:640px;
-    font-size:14px;
+  @media (max-width:720px){
+    .stats{ grid-template-columns:1fr 1fr; }
+    table{ font-size:12.5px; }
+    th, td{ padding:10px; }
   }
-  table.results-table th, table.results-table td{
-    padding:12px 16px;
-    text-align:left;
-    border-bottom:1px solid var(--color-border);
-    white-space:nowrap;
-  }
-  table.results-table th{
-    cursor:pointer;
-    color:var(--color-text-muted);
-    font-weight:600;
-    font-size:12.5px;
-    text-transform:uppercase;
-    letter-spacing:0.03em;
-    user-select:none;
-  }
-  table.results-table th .sort-arrow{ margin-left:5px; opacity:0.5; }
-  table.results-table th.sorted .sort-arrow{ opacity:1; }
-  table.results-table tbody tr:last-child td{ border-bottom:none; }
-  table.results-table tbody tr:hover{ background:var(--color-bg); }
-
-  .pill{
-    display:inline-block;
-    padding:4px 12px;
-    border-radius:999px;
-    font-size:12.5px;
-    font-weight:600;
-  }
-  .pill.good{ background:var(--color-good-tint); color:var(--color-good); }
-  .pill.mid{ background:var(--color-mid-tint); color:var(--color-mid); }
-  .pill.bad{ background:var(--color-bad-tint); color:var(--color-bad); }
-
-  .admin-empty, .admin-error{
-    padding:40px 20px;
-    text-align:center;
-    color:var(--color-text-muted);
-  }
-  .admin-error{ color:var(--color-bad); }
-
-  [hidden]{ display:none !important; }
-
-  /* ---------- Responsive ---------- */
-  @media (max-width:640px){
-    .block{ padding:40px 16px; }
-    .steps-preview{ grid-template-columns:repeat(2,1fr); }
-    .cards-grid{ grid-template-columns:1fr; }
-    .results-grid{ grid-template-columns:1fr; }
-    .stat-cards{ grid-template-columns:repeat(2,1fr); }
-    .progress-time{ font-size:11px; }
-    .accordion-panel-inner{ padding-left:18px; }
-  }
-  @media (max-width:400px){
-    .stat-cards{ grid-template-columns:1fr 1fr; }
-    .admin-header h1{ font-size:18px; }
-  }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; scroll-behavior:auto !important; } }
 </style>
 </head>
 <body>
 
-<div class="progress-bar" id="progressBar" role="progressbar" aria-label="Прогресс обучения" aria-valuemin="0" aria-valuemax="100">
-  <div class="progress-segments">
-    <div class="progress-segment"><span class="fill"></span></div>
-    <div class="progress-segment"><span class="fill"></span></div>
-    <div class="progress-segment"><span class="fill"></span></div>
-    <div class="progress-segment"><span class="fill"></span></div>
-  </div>
-  <div class="progress-time" id="progressTime">~20 мин осталось</div>
-</div>
-
+<!-- ===================== ОБУЧЕНИЕ (для менеджеров) ===================== -->
 <div id="trainingView">
 
-  <section class="block block-hero" id="block-welcome">
+  <div class="progress-bar">
+    <div class="progress-inner">
+      <div class="progress-track" id="progressTrack">
+        <div class="progress-seg" data-seg="0"><i></i></div>
+        <div class="progress-seg" data-seg="1"><i></i></div>
+        <div class="progress-seg" data-seg="2"><i></i></div>
+        <div class="progress-seg" data-seg="3"><i></i></div>
+      </div>
+      <div class="progress-time" id="progressTime">~20 мин осталось</div>
+    </div>
+  </div>
+
+  <section class="hero wrap" id="sec-hero">
+    <div class="eyebrow">Обучение · Коммерческий блок</div>
     <h1>Стандарт сервиса и техника продаж</h1>
-    <p>Короткий практический курс для менеджеров по продажам коммерческого блока АО «Казахтелеком». Он поможет освежить ключевые принципы работы с клиентами и подготовиться к ежемесячному тестированию. Займёт около 20 минут.</p>
+    <p class="lead">Короткий курс для новых и действующих менеджеров по продажам. За 20 минут — освежите стандарт обслуживания клиентов и ключевые приёмы продаж, которые пригодятся уже на следующем звонке.</p>
 
-    <div class="steps-preview">
-      <div class="step-badge"><strong>1</strong>Чек-лист сервиса</div>
-      <div class="step-badge"><strong>2</strong>Техника продаж</div>
-      <div class="step-badge"><strong>3</strong>Удержание клиентов</div>
-      <div class="step-badge"><strong>4</strong>Финальный тест</div>
+    <div class="hero-meta">
+      <div class="meta-chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>4 блока · ~20 минут</div>
+      <div class="meta-chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Результат увидит ваш ментор</div>
     </div>
 
-    <div class="field-group">
-      <label for="fioInput">ФИО *</label>
-      <input type="text" id="fioInput" placeholder="Иванов Иван Иванович" autocomplete="name">
-      <p class="field-hint" id="fioHint" hidden>Пожалуйста, укажите ФИО — оно понадобится для отправки результата в конце курса</p>
+    <div class="name-card">
+      <label for="managerName">ФИО (нужно, чтобы ментор увидел ваш результат)</label>
+      <input type="text" id="managerName" placeholder="Иванов Иван Иванович" autocomplete="name">
+      <p class="hint">Заполните перед началом — поле понадобится в конце для отправки результата.</p>
     </div>
 
-    <button class="btn btn-primary" id="startBtn">Начать обучение →</button>
+    <a href="#sec-checklist" class="btn">Начать обучение
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
   </section>
 
-  <section class="block" id="block-1">
-    <div class="block-heading">
-      <span class="block-number">Блок 1</span>
-      <h2>Чек-лист обслуживания</h2>
-    </div>
-    <p class="block-lead">Отметьте каждый пункт стандарта сервиса, ознакомившись с ним.</p>
-    <div class="checklist-counter">Отмечено <strong id="checklistCount">0</strong> из 7</div>
-    <ul class="checklist" id="checklistList">
-      <li><button type="button" class="checklist-item" data-index="0"><span class="check-box">✓</span><span class="item-text">Поприветствуйте клиента и представьтесь по имени</span></button></li>
-      <li><button type="button" class="checklist-item" data-index="1"><span class="check-box">✓</span><span class="item-text">Выясните цель обращения и реальную потребность клиента</span></button></li>
-      <li><button type="button" class="checklist-item" data-index="2"><span class="check-box">✓</span><span class="item-text">Слушайте активно — не перебивайте, уточняйте детали</span></button></li>
-      <li><button type="button" class="checklist-item" data-index="3"><span class="check-box">✓</span><span class="item-text">Предложите решение, которое закрывает именно эту потребность</span></button></li>
-      <li><button type="button" class="checklist-item" data-index="4"><span class="check-box">✓</span><span class="item-text">Озвучьте условия и убедитесь, что клиент их понял</span></button></li>
-      <li><button type="button" class="checklist-item" data-index="5"><span class="check-box">✓</span><span class="item-text">Отработайте возражения и зафиксируйте договорённости</span></button></li>
-      <li><button type="button" class="checklist-item" data-index="6"><span class="check-box">✓</span><span class="item-text">Поблагодарите за обращение и пригласите обращаться снова</span></button></li>
+  <section class="wrap" id="sec-checklist" data-seg="0">
+    <div class="eyebrow">Блок 1 · ~5 мин</div>
+    <h2>Чек-лист обслуживания</h2>
+    <p>Это база стандарта сервиса — то, что должно происходить при каждом обращении клиента, независимо от канала. Отметьте пункты, чтобы проверить себя.</p>
+    <ul class="checklist" id="checklist">
+      <li class="check-item"><div class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div><div class="check-text">Поприветствовать клиента в течение <b>первых 30 секунд</b> обращения</div></li>
+      <li class="check-item"><div class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div><div class="check-text"><b>Представиться</b> и назвать компанию</div></li>
+      <li class="check-item"><div class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div><div class="check-text">Уточнить <b>цель обращения</b> и реальную потребность клиента, а не предлагать наугад</div></li>
+      <li class="check-item"><div class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div><div class="check-text">Предложить решение, которое <b>реально соответствует</b> потребности клиента</div></li>
+      <li class="check-item"><div class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div><div class="check-text">Озвучить условия — <b>тариф, стоимость, сроки</b> — без искажений</div></li>
+      <li class="check-item"><div class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div><div class="check-text">Уточнить, <b>остались ли вопросы</b>, прежде чем завершать разговор</div></li>
+      <li class="check-item"><div class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div><div class="check-text"><b>Поблагодарить</b> и попрощаться по стандарту компании</div></li>
     </ul>
+    <div class="checklist-status" id="checklistStatus"><span class="dot"></span> <span id="checklistStatusText">Отмечено 0 из 7</span></div>
   </section>
 
-  <section class="block" id="block-2">
-    <div class="block-heading">
-      <span class="block-number">Блок 2</span>
-      <h2>Техника продаж</h2>
-    </div>
-    <p class="block-lead">Пять последовательных шагов классической техники продаж. Раскройте каждый шаг, чтобы увидеть описание и пример фразы.</p>
-    <div class="accordion" id="accordionList">
-      <div class="accordion-item" data-index="0">
-        <button type="button" class="accordion-header">
-          <span class="step-num">1</span>
-          <span>Установление контакта</span>
-          <span class="chev">▾</span>
-        </button>
-        <div class="accordion-panel">
-          <div class="accordion-panel-inner">
-            <p>Создайте доброжелательную атмосферу, представьтесь и обозначьте цель разговора — клиенту должно быть понятно, кто вы и зачем.</p>
-            <div class="example">«Добрый день! Меня зовут Айгуль, я помогу вам подобрать оптимальное решение. Расскажите, что вас интересует?»</div>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item" data-index="1">
-        <button type="button" class="accordion-header">
-          <span class="step-num">2</span>
-          <span>Выявление потребности</span>
-          <span class="chev">▾</span>
-        </button>
-        <div class="accordion-panel">
-          <div class="accordion-panel-inner">
-            <p>Задавайте открытые вопросы, чтобы понять, что действительно важно клиенту, прежде чем что-либо предлагать.</p>
-            <div class="example">«Для каких задач вы планируете использовать услугу — дом, бизнес, работа из дома?»</div>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item" data-index="2">
-        <button type="button" class="accordion-header">
-          <span class="step-num">3</span>
-          <span>Презентация решения</span>
-          <span class="chev">▾</span>
-        </button>
-        <div class="accordion-panel">
-          <div class="accordion-panel-inner">
-            <p>Показывайте выгоды, а не просто характеристики — привязывайте их к словам, которые сказал сам клиент.</p>
-            <div class="example">«С учётом того, что вам важна стабильность соединения, рекомендую тариф «Оптима» — он даёт приоритетную скорость даже в часы пик»</div>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item" data-index="3">
-        <button type="button" class="accordion-header">
-          <span class="step-num">4</span>
-          <span>Работа с возражениями</span>
-          <span class="chev">▾</span>
-        </button>
-        <div class="accordion-panel">
-          <div class="accordion-panel-inner">
-            <p>Не спорьте — признайте точку зрения клиента и приведите аргумент по существу.</p>
-            <div class="example">«Понимаю ваши сомнения по цене, давайте сравним, что входит в пакет по сравнению с текущим тарифом»</div>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item" data-index="4">
-        <button type="button" class="accordion-header">
-          <span class="step-num">5</span>
-          <span>Завершение сделки</span>
-          <span class="chev">▾</span>
-        </button>
-        <div class="accordion-panel">
-          <div class="accordion-panel-inner">
-            <p>Подведите итог разговора и предложите ясный, конкретный следующий шаг — не оставляйте клиента в неопределённости.</p>
-            <div class="example">«Оформляем подключение на этих условиях? Я подготовлю всё за пару минут»</div>
-          </div>
-        </div>
-      </div>
+  <section class="wrap" id="sec-sales" data-seg="1">
+    <div class="eyebrow">Блок 2 · ~6 мин</div>
+    <h2>Техника продаж</h2>
+    <p>Пять шагов, которые ведут разговор от «здравствуйте» до закрытой сделки. Нажмите на каждый шаг, чтобы увидеть суть и пример фразы.</p>
+    <div class="steps" id="steps">
+      <div class="step"><div class="step-head"><div class="step-num">1</div><div class="step-title">Установление контакта</div><svg class="step-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="step-body"><div class="step-body-inner"><p>Первые 10–15 секунд решают, будет ли клиент вам доверять дальше. Тон дружелюбный, темп — чуть медленнее, чем кажется естественным.</p><div class="phrase">«Добрый день! Меня зовут [имя], компания Казахтелеком. Подскажите, как я могу к вам обращаться?»</div></div></div></div>
+      <div class="step"><div class="step-head"><div class="step-num">2</div><div class="step-title">Выявление потребности</div><svg class="step-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="step-body"><div class="step-body-inner"><p>Задавайте открытые вопросы прежде, чем предлагать что-либо. Кто предлагает раньше, чем спрашивает — продаёт не то, что нужно клиенту.</p><div class="phrase">«Расскажите, как вы сейчас пользуетесь интернетом/связью — что устраивает, а что хотелось бы улучшить?»</div></div></div></div>
+      <div class="step"><div class="step-head"><div class="step-num">3</div><div class="step-title">Презентация решения</div><svg class="step-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="step-body"><div class="step-body-inner"><p>Говорите на языке выгоды, а не характеристик. Не «100 Мбит/с», а что это даёт клиенту в его повседневных задачах.</p><div class="phrase">«С учётом того, что вы сказали, вам подойдёт [решение] — это снимет именно ту проблему, о которой вы говорили»</div></div></div></div>
+      <div class="step"><div class="step-head"><div class="step-num">4</div><div class="step-title">Работа с возражениями</div><svg class="step-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="step-body"><div class="step-body-inner"><p>Возражение — не отказ, а запрос на дополнительную информацию. Сначала признайте его, потом уточните, потом ответьте по существу.</p><div class="phrase">«Понимаю, вопрос цены важен. Скажите, с чем сравниваете — чтобы я мог показать точную выгоду?»</div></div></div></div>
+      <div class="step"><div class="step-head"><div class="step-num">5</div><div class="step-title">Завершение сделки</div><svg class="step-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="step-body"><div class="step-body-inner"><p>Не ждите, что клиент сам предложит оформить услугу. Предложите конкретный следующий шаг.</p><div class="phrase">«Тогда предлагаю оформить подключение прямо сейчас — это займёт пару минут. Начнём?»</div></div></div></div>
     </div>
   </section>
 
-  <section class="block" id="block-3">
-    <div class="block-heading">
-      <span class="block-number">Блок 3</span>
-      <h2>Удержание клиентов</h2>
-    </div>
-    <p class="block-lead">Хороший сервис не заканчивается на продаже — удержание клиента строится на этих четырёх принципах.</p>
-    <div class="cards-grid">
-      <div class="info-card">
-        <span class="icon">📞</span>
-        <h3>Проактивная забота</h3>
-        <p>Связывайтесь с клиентом до того, как он обратится с проблемой сам: уведомляйте о плановых работах, напоминайте о смене тарифа.</p>
-      </div>
-      <div class="info-card">
-        <span class="icon">🎯</span>
-        <h3>Персональные предложения</h3>
-        <p>Предлагайте услуги исходя из истории использования конкретного клиента, а не типовые акции всем подряд.</p>
-      </div>
-      <div class="info-card">
-        <span class="icon">🤝</span>
-        <h3>Работа с недовольством</h3>
-        <p>Выслушайте, признайте проблему, извинитесь за неудобство и предложите конкретное решение со сроками.</p>
-      </div>
-      <div class="info-card">
-        <span class="icon">🏆</span>
-        <h3>Программа лояльности</h3>
-        <p>Рассказывайте о бонусах и привилегиях постоянным клиентам — это стимулирует долгосрочные отношения.</p>
-      </div>
+  <section class="wrap" id="sec-retention" data-seg="2">
+    <div class="eyebrow">Блок 3 · ~5 мин</div>
+    <h2>Удержание клиентов</h2>
+    <p>Продажа не заканчивается на подключении. Удержание клиента обходится компании дешевле, чем привлечение нового — и это тоже часть вашей работы.</p>
+    <div class="cards">
+      <div class="card"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg><h3>Проактивная забота</h3><p>Звонок через 3–5 дней после подключения: всё ли работает, нет ли вопросов. Проблема, найденная вами, не превращается в жалобу.</p></div>
+      <div class="card"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg><h3>Персональные предложения</h3><p>Опирайтесь на историю использования, а не на общий список услуг — предложение «в точку» воспринимается как забота, а не навязывание.</p></div>
+      <div class="card"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg><h3>Работа с недовольством</h3><p>Алгоритм: выслушать до конца → признать неудобство → предложить конкретное решение → зафиксировать в системе. Никогда не спорить первым.</p></div>
+      <div class="card"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><h3>Программа лояльности</h3><p>Расскажите о бонусах и программах лояльности заранее — клиент, который знает о выгодах, реже уходит к конкурентам «на разведку».</p></div>
     </div>
   </section>
 
-  <section class="block" id="block-4">
-    <div class="block-heading">
-      <span class="block-number">Блок 4</span>
-      <h2>Финальный тест</h2>
-    </div>
-    <p class="block-lead">Ответьте на 4 вопроса. После выбора варианта сразу увидите правильный ответ.</p>
-
-    <div class="quiz-question" data-qindex="0">
-      <h3>1. Клиент говорит: «Мне нужно подумать». Как лучше поступить?</h3>
-      <div class="quiz-options">
-        <button type="button" class="quiz-option" data-correct="false">Согласиться и закончить разговор без уточнений</button>
-        <button type="button" class="quiz-option" data-correct="true">Уточнить, какие сомнения остались, и ответить на них</button>
-        <button type="button" class="quiz-option" data-correct="false">Настоять на немедленном оформлении</button>
-        <button type="button" class="quiz-option" data-correct="false">Проигнорировать фразу и продолжить презентацию</button>
+  <section class="wrap" id="sec-finish" data-seg="3">
+    <div class="eyebrow">Блок 4 · ~4 мин</div>
+    <h2>Проверьте себя</h2>
+    <p>Выберите один вариант ответа в каждом вопросе — это и есть ваш финальный тест.</p>
+    <div class="quiz" id="quiz">
+      <div class="quiz-item" data-correct="1">
+        <div class="quiz-q">1. За сколько секунд нужно поприветствовать клиента?</div>
+        <div class="quiz-options">
+          <button class="quiz-option">До 10 секунд</button><button class="quiz-option">До 30 секунд</button><button class="quiz-option">В течение минуты</button><button class="quiz-option">Строгих рамок нет</button>
+        </div>
       </div>
-    </div>
-
-    <div class="quiz-question" data-qindex="1">
-      <h3>2. Что является первым шагом техники продаж?</h3>
-      <div class="quiz-options">
-        <button type="button" class="quiz-option" data-correct="false">Презентация решения</button>
-        <button type="button" class="quiz-option" data-correct="false">Работа с возражениями</button>
-        <button type="button" class="quiz-option" data-correct="true">Установление контакта</button>
-        <button type="button" class="quiz-option" data-correct="false">Завершение сделки</button>
+      <div class="quiz-item" data-correct="1">
+        <div class="quiz-q">2. Что нужно сделать до презентации решения?</div>
+        <div class="quiz-options">
+          <button class="quiz-option">Сразу предложить самый дорогой тариф</button><button class="quiz-option">Выявить потребность клиента через вопросы</button><button class="quiz-option">Рассказать про все акции компании</button><button class="quiz-option">Согласовать скидку с руководителем</button>
+        </div>
       </div>
-    </div>
-
-    <div class="quiz-question" data-qindex="2">
-      <h3>3. Клиент недоволен качеством услуги. Что правильно сделать в первую очередь?</h3>
-      <div class="quiz-options">
-        <button type="button" class="quiz-option" data-correct="false">Объяснить, что в этом виноват сам клиент</button>
-        <button type="button" class="quiz-option" data-correct="true">Выслушать и признать проблему, извинившись за неудобства</button>
-        <button type="button" class="quiz-option" data-correct="false">Сразу предложить скидку, не разобравшись в ситуации</button>
-        <button type="button" class="quiz-option" data-correct="false">Перевести звонок на другого сотрудника без объяснений</button>
+      <div class="quiz-item" data-correct="1">
+        <div class="quiz-q">3. Как правильно реагировать на возражение клиента?</div>
+        <div class="quiz-options">
+          <button class="quiz-option">Сразу переубедить его фактами</button><button class="quiz-option">Признать возражение, уточнить, затем ответить по существу</button><button class="quiz-option">Предложить перезвонить позже</button><button class="quiz-option">Согласиться и закончить разговор</button>
+        </div>
       </div>
-    </div>
-
-    <div class="quiz-question" data-qindex="3">
-      <h3>4. Что относится к проактивной заботе о клиенте?</h3>
-      <div class="quiz-options">
-        <button type="button" class="quiz-option" data-correct="false">Ждать, пока клиент сам обратится с проблемой</button>
-        <button type="button" class="quiz-option" data-correct="true">Уведомить клиента о плановых работах заранее</button>
-        <button type="button" class="quiz-option" data-correct="false">Предлагать одну и ту же акцию всем клиентам подряд</button>
-        <button type="button" class="quiz-option" data-correct="false">Не напоминать клиенту о смене тарифа</button>
+      <div class="quiz-item" data-correct="1">
+        <div class="quiz-q">4. Через сколько дней стоит сделать контрольный звонок после подключения?</div>
+        <div class="quiz-options">
+          <button class="quiz-option">В тот же день</button><button class="quiz-option">Через 3–5 дней</button><button class="quiz-option">Через месяц</button><button class="quiz-option">Звонок не требуется</button>
+        </div>
       </div>
     </div>
 
     <div class="results-card">
-      <h3>Ваш результат</h3>
-      <div class="results-grid">
-        <div class="stat">
-          <div class="value" id="resultChecklist">0/7</div>
-          <div class="label">Чек-лист</div>
-        </div>
-        <div class="stat">
-          <div class="value" id="resultQuiz">0/4</div>
-          <div class="label">Тест</div>
-        </div>
-        <div class="stat">
-          <div class="value" id="resultTime">0 мин</div>
-          <div class="label">Время на странице</div>
-        </div>
+      <h3 style="font-size:16px;">Ваш результат</h3>
+      <div class="results-row"><span>Чек-лист обслуживания</span><b id="resChecklist">0 из 7</b></div>
+      <div class="results-row"><span>Финальный тест</span><b id="resQuiz">0 из 4</b></div>
+      <div class="results-row"><span>Время на странице</span><b id="resTime">0 мин</b></div>
+      <div class="submit-row">
+        <button class="btn" id="submitBtn">Отправить результат
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+        <span class="submit-status" id="submitStatus"></span>
       </div>
-      <button class="btn btn-primary" id="submitBtn">Отправить результат</button>
-      <div class="submit-status" id="submitStatus"></div>
     </div>
   </section>
 
-  <footer class="page-footer">
-    АО «Казахтелеком» · Коммерческий блок · Обучающий модуль «Стандарт сервиса и техника продаж»<br>
-    <a id="adminLinkFooter">Вход для администратора</a>
+  <footer class="wrap">
+    АО «Казахтелеком» · Обучение коммерческого блока<br>
+    <button class="footer-admin-link" id="openAdminLink" style="margin-top:8px;">Панель администратора</button>
   </footer>
+
+  <button class="admin-fab" id="adminFab" aria-label="Панель администратора">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+  </button>
+  <div class="admin-fab-label">Панель администратора</div>
+
 </div>
 
-<div id="adminView" hidden>
-  <div class="admin-header">
-    <h1>Панель администратора</h1>
-    <div class="admin-actions">
-      <button class="btn btn-ghost" id="refreshBtn">↻ Обновить</button>
-      <a class="btn btn-ghost" id="backToTrainingLink">← К обучению</a>
+<!-- ===================== АДМИН-ПАНЕЛЬ (для вас) ===================== -->
+<div id="adminView">
+  <div class="admin-wrap">
+    <div class="admin-top">
+      <div>
+        <h1>Результаты обучения</h1>
+        <p>Стандарт сервиса и техника продаж · коммерческий блок</p>
+      </div>
+      <div class="admin-actions">
+        <button class="icon-btn" id="refreshBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          Обновить
+        </button>
+        <a href="?" class="icon-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          К обучению
+        </a>
+      </div>
     </div>
-  </div>
 
-  <div class="admin-banner" id="adminDemoBanner" hidden>
-    Показаны демонстрационные данные — Google Таблица ещё не подключена. Настройте <code>SHEET_CSV_URL</code> в коде страницы, чтобы видеть реальные результаты сотрудников.
-  </div>
-
-  <div class="stat-cards">
-    <div class="stat-card">
-      <div class="value" id="statCount">—</div>
-      <div class="label">Прошли обучение</div>
+    <div class="config-note" id="configNote" style="display:none;">
+      Ссылка на таблицу с результатами ещё не настроена. Замените <code>SHEET_CSV_URL</code> в коде страницы на ссылку опубликованной Google Таблицы (Файл → Опубликовать в интернете → формат CSV).
     </div>
-    <div class="stat-card">
-      <div class="value" id="statAvgQuiz">—</div>
-      <div class="label">Средний балл теста</div>
-    </div>
-    <div class="stat-card">
-      <div class="value" id="statFullChecklist">—</div>
-      <div class="label">Чек-лист пройден полностью</div>
-    </div>
-    <div class="stat-card">
-      <div class="value" id="statAvgTime">—</div>
-      <div class="label">Среднее время прохождения</div>
-    </div>
-  </div>
 
-  <div class="admin-toolbar">
-    <input type="text" class="search-input" id="searchInput" placeholder="Поиск по ФИО...">
-  </div>
-
-  <div class="table-wrap">
-    <table class="results-table" id="resultsTable">
-      <thead>
-        <tr>
-          <th data-col="date">Дата<span class="sort-arrow">↕</span></th>
-          <th data-col="name">ФИО<span class="sort-arrow">↕</span></th>
-          <th data-col="checklist">Чек-лист<span class="sort-arrow">↕</span></th>
-          <th data-col="quiz">Тест<span class="sort-arrow">↕</span></th>
-          <th data-col="time">Время<span class="sort-arrow">↕</span></th>
-        </tr>
-      </thead>
-      <tbody id="resultsTbody"></tbody>
-    </table>
-  </div>
-  <div class="admin-empty" id="adminEmpty" hidden>Пока нет данных для отображения</div>
-  <div class="admin-error" id="adminError" hidden>Не удалось загрузить данные. Проверьте подключение к интернету и повторите попытку.</div>
-</div>
-
-<button class="fab" id="adminFab" aria-label="Вход в панель администратора" title="Вход в панель администратора">🔒</button>
-
-<div class="modal-overlay" id="adminModalOverlay" hidden>
-  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle">
-    <h3 id="adminModalTitle">Вход в панель администратора</h3>
-    <div class="field-group">
-      <label for="adminPasscodeInput">Код доступа</label>
-      <input type="password" id="adminPasscodeInput" autocomplete="off">
-      <p class="field-hint" id="adminModalError" hidden>Неверный код доступа</p>
+    <div class="stats">
+      <div class="stat"><div class="label">Прошли обучение</div><div class="value" id="statCount">—</div></div>
+      <div class="stat"><div class="label">Ср. балл теста</div><div class="value accent" id="statQuiz">—</div></div>
+      <div class="stat"><div class="label">Чек-лист полностью</div><div class="value accent" id="statChecklist">—</div></div>
+      <div class="stat"><div class="label">Среднее время</div><div class="value" id="statTime">—</div></div>
     </div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" id="adminModalCancel">Отмена</button>
-      <button class="btn btn-primary" id="adminModalSubmit">Войти</button>
+
+    <div class="toolbar"><input class="search" id="searchInput" placeholder="Поиск по ФИО..."></div>
+
+    <div class="table-card">
+      <table id="resultsTable">
+        <thead><tr>
+          <th data-key="date">Дата</th><th data-key="name">Имя</th><th data-key="checklist">Чек-лист</th><th data-key="quiz">Тест</th><th data-key="time">Время</th>
+        </tr></thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+      <div class="loading" id="loadingMsg">Загрузка результатов...</div>
+      <div class="empty" id="emptyMsg" style="display:none;">Пока никто не прошёл обучение — результаты появятся здесь автоматически.</div>
     </div>
   </div>
 </div>
 
 <script>
-(function(){
-  "use strict";
+  /* =========================================================
+     НАСТРОЙКИ — замените две ссылки ниже перед публикацией
+     ========================================================= */
+  // 1) Ссылка веб-приложения Google Apps Script (для записи результатов менеджеров)
+  const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbwB_PQF16oFe7OdXd24NFsw_jgcQ2lRjcRauMFXbgsJDDC1U5kAEninjC5jt98fRdBP6A/exec";
+  // 2) Ссылка опубликованной Google Таблицы в формате CSV (для чтения админ-панелью)
+  const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/13dWhLcNG4v_ZvUCco6HUX560nofFI2V33VDlTSc7u-c/gviz/tq?tqx=out:csv&gid=0";
+  // 3) Код доступа для админ-панели (это не настоящая защита, а простой фильтр от случайных заходов)
+  const ADMIN_PASSCODE = "1234";
 
-  // ===== Конфигурация: заполнить перед запуском в продакшн =====
-  var CONFIG = {
-    ENDPOINT_URL: "https://script.google.com/macros/s/ВАШ_ID_ВЕБ_ПРИЛОЖЕНИЯ/exec",
-    SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/ВАШ_ID_ТАБЛИЦЫ/pub?output=csv",
-    ADMIN_PASSCODE: "1234"
-  };
+  /* ---------------------------------------------------------
+     ОБУЧЕНИЕ
+     --------------------------------------------------------- */
+  const startTime = Date.now();
 
-  var TOTAL_MINUTES = 20;
-  var pageLoadTime = Date.now();
+  const items = document.querySelectorAll('.check-item');
+  const statusEl = document.getElementById('checklistStatus');
+  const statusText = document.getElementById('checklistStatusText');
+  const checklistTotal = items.length;
 
-  var trainingView = document.getElementById('trainingView');
-  var adminView = document.getElementById('adminView');
-  var fioInput = document.getElementById('fioInput');
-  var fioHint = document.getElementById('fioHint');
-
-  // ---------- Прогресс-бар ----------
-  var segments = document.querySelectorAll('.progress-segment .fill');
-  var progressTimeEl = document.getElementById('progressTime');
-  var ticking = false;
-
-  function updateProgress(){
-    ticking = false;
-    var doc = document.documentElement;
-    var scrollable = doc.scrollHeight - doc.clientHeight;
-    var p = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
-
-    segments.forEach(function(fill, i){
-      var segStart = i / 4;
-      var segProgress = Math.min(1, Math.max(0, (p - segStart) / 0.25));
-      fill.style.width = (segProgress * 100) + '%';
-    });
-
-    var minutesLeft = Math.round(TOTAL_MINUTES * (1 - p));
-    progressTimeEl.textContent = minutesLeft <= 0 ? 'Обучение завершено' : ('~' + minutesLeft + ' мин осталось');
-    document.getElementById('progressBar').setAttribute('aria-valuenow', Math.round(p * 100));
+  function updateChecklist(){
+    const done = document.querySelectorAll('.check-item.done').length;
+    statusText.textContent = `Отмечено ${done} из ${checklistTotal}`;
+    statusEl.classList.toggle('complete', done === checklistTotal);
+    document.getElementById('resChecklist').textContent = `${done} из ${checklistTotal}`;
   }
+  items.forEach(item => item.addEventListener('click', () => { item.classList.toggle('done'); updateChecklist(); }));
 
-  window.addEventListener('scroll', function(){
-    if(!ticking){
-      window.requestAnimationFrame(updateProgress);
-      ticking = true;
-    }
-  }, { passive:true });
-  updateProgress();
-
-  // ---------- Приветствие ----------
-  document.getElementById('startBtn').addEventListener('click', function(){
-    document.getElementById('block-1').scrollIntoView({ behavior:'smooth', block:'start' });
-  });
-
-  function validateFio(){
-    var val = fioInput.value.trim();
-    if(!val){
-      fioHint.hidden = false;
-      fioInput.classList.add('invalid');
-      fioInput.scrollIntoView({ behavior:'smooth', block:'center' });
-      fioInput.focus();
-      return false;
-    }
-    fioHint.hidden = true;
-    fioInput.classList.remove('invalid');
-    return true;
-  }
-  fioInput.addEventListener('input', function(){
-    if(fioInput.value.trim()){
-      fioHint.hidden = true;
-      fioInput.classList.remove('invalid');
-    }
-  });
-
-  // ---------- Чек-лист ----------
-  var checklistState = [false,false,false,false,false,false,false];
-  var checklistCountEl = document.getElementById('checklistCount');
-  var resultChecklistEl = document.getElementById('resultChecklist');
-
-  document.querySelectorAll('.checklist-item').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var idx = parseInt(btn.getAttribute('data-index'), 10);
-      checklistState[idx] = !checklistState[idx];
-      btn.classList.toggle('done', checklistState[idx]);
-      renderChecklistCount();
+  const steps = document.querySelectorAll('.step');
+  steps.forEach(step => {
+    step.querySelector('.step-head').addEventListener('click', () => {
+      const isActive = step.classList.contains('active');
+      steps.forEach(s => s.classList.remove('active'));
+      if(!isActive) step.classList.add('active');
     });
   });
 
-  function renderChecklistCount(){
-    var done = checklistState.filter(Boolean).length;
-    checklistCountEl.textContent = done;
-    resultChecklistEl.textContent = done + '/7';
-  }
-
-  // ---------- Аккордеон ----------
-  document.querySelectorAll('.accordion-header').forEach(function(header){
-    header.addEventListener('click', function(){
-      var item = header.closest('.accordion-item');
-      item.classList.toggle('open');
-    });
-  });
-
-  // ---------- Квиз ----------
-  var quizScore = 0;
-  var answeredCount = 0;
-  var resultQuizEl = document.getElementById('resultQuiz');
-
-  document.querySelectorAll('.quiz-question').forEach(function(question){
-    var options = question.querySelectorAll('.quiz-option');
-    var answered = false;
-    options.forEach(function(opt){
-      opt.addEventListener('click', function(){
-        if(answered) return;
-        answered = true;
-        answeredCount++;
-        var isCorrect = opt.getAttribute('data-correct') === 'true';
-        if(isCorrect) quizScore++;
-
-        options.forEach(function(o){
-          o.disabled = true;
-          if(o.getAttribute('data-correct') === 'true'){
-            o.classList.add('correct');
-          } else if(o === opt){
-            o.classList.add('incorrect');
-          }
-        });
-
-        resultQuizEl.textContent = quizScore + '/4';
+  let quizCorrect = 0;
+  const quizItems = document.querySelectorAll('.quiz-item');
+  const quizTotal = quizItems.length;
+  quizItems.forEach(item => {
+    const correctIdx = parseInt(item.dataset.correct, 10);
+    const options = item.querySelectorAll('.quiz-option');
+    options.forEach((opt, idx) => {
+      opt.addEventListener('click', () => {
+        if(item.classList.contains('answered')) return;
+        item.classList.add('answered');
+        options.forEach(o => o.disabled = true);
+        options[correctIdx].classList.add('correct');
+        if(idx === correctIdx) quizCorrect++; else opt.classList.add('wrong');
+        document.getElementById('resQuiz').textContent = `${quizCorrect} из ${quizTotal}`;
       });
     });
   });
 
-  // ---------- Отправка результата ----------
-  var submitBtn = document.getElementById('submitBtn');
-  var submitStatus = document.getElementById('submitStatus');
-  var resultTimeEl = document.getElementById('resultTime');
+  const segSections = document.querySelectorAll('[data-seg]');
+  const segBars = document.querySelectorAll('.progress-seg');
+  const timeEl = document.getElementById('progressTime');
+  const timeLeftBySeg = ['~15 мин осталось','~10 мин осталось','~5 мин осталось','Почти готово'];
 
-  function currentMinutesSpent(){
-    return Math.max(1, Math.round((Date.now() - pageLoadTime) / 60000));
+  function updateProgress(){
+    if(document.getElementById('trainingView').style.display === 'none') return;
+    const viewportMid = window.innerHeight * 0.35;
+    let currentIdx = -1;
+    segSections.forEach((sec) => {
+      const rect = sec.getBoundingClientRect();
+      const idx = parseInt(sec.dataset.seg, 10);
+      const segBar = segBars[idx].querySelector('i');
+      if(rect.top < viewportMid){
+        currentIdx = idx;
+        const total = rect.height;
+        const passed = Math.min(Math.max(viewportMid - rect.top, 0), total);
+        segBar.style.width = Math.round((passed/total)*100) + '%';
+      } else segBar.style.width = '0%';
+    });
+    timeEl.textContent = currentIdx === -1 ? '~20 мин осталось' : timeLeftBySeg[currentIdx];
+    const minutes = Math.max(1, Math.round((Date.now() - startTime) / 60000));
+    document.getElementById('resTime').textContent = `${minutes} мин`;
   }
+  window.addEventListener('scroll', updateProgress, { passive:true });
+  window.addEventListener('resize', updateProgress);
+  setInterval(updateProgress, 15000);
 
-  setInterval(function(){
-    resultTimeEl.textContent = currentMinutesSpent() + ' мин';
-  }, 15000);
-  resultTimeEl.textContent = currentMinutesSpent() + ' мин';
+  document.getElementById('submitBtn').addEventListener('click', async () => {
+    const nameInput = document.getElementById('managerName');
+    const name = nameInput.value.trim();
+    const submitStatus = document.getElementById('submitStatus');
+    const submitBtn = document.getElementById('submitBtn');
 
-  submitBtn.addEventListener('click', function(){
-    if(!validateFio()) return;
-
-    var payload = {
-      date: new Date().toLocaleDateString('ru-RU'),
-      name: fioInput.value.trim(),
-      checklist: checklistState.filter(Boolean).length,
-      quiz: quizScore,
-      time: currentMinutesSpent()
-    };
+    if(!name){
+      submitStatus.textContent = 'Заполните ФИО в начале страницы';
+      submitStatus.className = 'submit-status err';
+      document.getElementById('sec-hero').scrollIntoView({behavior:'smooth'});
+      nameInput.focus();
+      return;
+    }
+    if(ENDPOINT_URL.includes('ВСТАВЬТЕ')){
+      submitStatus.textContent = 'Ссылка для отправки ещё не настроена — обратитесь к администратору';
+      submitStatus.className = 'submit-status err';
+      return;
+    }
+    const doneCount = document.querySelectorAll('.check-item.done').length;
+    const timeSpentSec = Math.round((Date.now() - startTime) / 1000);
+    const payload = { name, checklistDone: doneCount, checklistTotal, quizCorrect, quizTotal, timeSpentSec, completedAt: new Date().toISOString() };
 
     submitBtn.disabled = true;
     submitStatus.textContent = 'Отправка...';
-    submitStatus.className = 'submit-status pending';
-
-    fetch(CONFIG.ENDPOINT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
-    }).then(function(){
-      submitStatus.textContent = 'Результат отправлен. Спасибо!';
-      submitStatus.className = 'submit-status success';
-    }).catch(function(){
-      submitStatus.textContent = 'Не удалось отправить результат. Проверьте подключение к интернету и попробуйте ещё раз.';
-      submitStatus.className = 'submit-status error';
+    submitStatus.className = 'submit-status';
+    try {
+      await fetch(ENDPOINT_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body: JSON.stringify(payload) });
+      submitStatus.textContent = 'Отправлено ✓ Результат передан администратору';
+      submitStatus.className = 'submit-status ok';
+      submitBtn.innerHTML = 'Отправлено ✓';
+    } catch (err) {
+      submitStatus.textContent = 'Не удалось отправить. Проверьте интернет и попробуйте снова';
+      submitStatus.className = 'submit-status err';
       submitBtn.disabled = false;
-    });
-  });
-
-  // ---------- Админ-панель: вход ----------
-  var adminModalOverlay = document.getElementById('adminModalOverlay');
-  var adminPasscodeInput = document.getElementById('adminPasscodeInput');
-  var adminModalError = document.getElementById('adminModalError');
-
-  function openAdminPrompt(){
-    adminModalError.hidden = true;
-    adminPasscodeInput.value = '';
-    adminPasscodeInput.classList.remove('invalid');
-    adminModalOverlay.hidden = false;
-    adminPasscodeInput.focus();
-  }
-
-  function closeAdminPrompt(){
-    adminModalOverlay.hidden = true;
-  }
-
-  function submitAdminPrompt(){
-    var code = adminPasscodeInput.value;
-    if(code === CONFIG.ADMIN_PASSCODE){
-      closeAdminPrompt();
-      showAdminView();
-    } else {
-      adminModalError.hidden = false;
-      adminPasscodeInput.classList.add('invalid');
-      adminPasscodeInput.focus();
     }
-  }
-
-  document.getElementById('adminModalSubmit').addEventListener('click', submitAdminPrompt);
-  document.getElementById('adminModalCancel').addEventListener('click', closeAdminPrompt);
-  adminPasscodeInput.addEventListener('keydown', function(e){
-    if(e.key === 'Enter') submitAdminPrompt();
-  });
-  adminModalOverlay.addEventListener('click', function(e){
-    if(e.target === adminModalOverlay) closeAdminPrompt();
-  });
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape' && !adminModalOverlay.hidden) closeAdminPrompt();
   });
 
-  function showAdminView(){
-    trainingView.hidden = true;
-    document.getElementById('progressBar').hidden = true;
-    document.getElementById('adminFab').hidden = true;
-    adminView.hidden = false;
-    fetchResults();
-  }
+  /* ---------------------------------------------------------
+     АДМИН-ПАНЕЛЬ
+     --------------------------------------------------------- */
+  let rows = [];
+  let sortKey = 'date';
+  let sortDir = -1;
 
-  function hideAdminView(){
-    adminView.hidden = true;
-    trainingView.hidden = false;
-    document.getElementById('progressBar').hidden = false;
-    document.getElementById('adminFab').hidden = false;
-    if(window.location.search.indexOf('admin') !== -1){
-      history.replaceState(null, '', window.location.pathname);
-    }
-  }
-
-  document.getElementById('adminFab').addEventListener('click', openAdminPrompt);
-  document.getElementById('adminLinkFooter').addEventListener('click', openAdminPrompt);
-  document.getElementById('backToTrainingLink').addEventListener('click', hideAdminView);
-  document.getElementById('refreshBtn').addEventListener('click', fetchResults);
-  document.getElementById('searchInput').addEventListener('input', function(){
-    renderTable();
-  });
-  document.querySelectorAll('#resultsTable th').forEach(function(th){
-    th.addEventListener('click', function(){
-      var col = th.getAttribute('data-col');
-      if(sortState.col === col){
-        sortState.dir = sortState.dir === 'asc' ? 'desc' : 'asc';
-      } else {
-        sortState.col = col;
-        sortState.dir = 'asc';
+  function parseCSV(text){
+    const lines = text.trim().split(/\r?\n/);
+    const parseLine = (line) => {
+      const result = []; let cur='', inQuotes=false;
+      for(let i=0;i<line.length;i++){
+        const c = line[i];
+        if(c === '"'){ if(inQuotes && line[i+1] === '"'){ cur+='"'; i++; } else inQuotes = !inQuotes; }
+        else if(c === ',' && !inQuotes){ result.push(cur); cur=''; }
+        else cur += c;
       }
-      updateSortIndicators();
-      renderTable();
-    });
-  });
-
-  if(window.location.search.indexOf('admin=1') !== -1){
-    openAdminPrompt();
-  }
-
-  // ---------- Админ-панель: данные ----------
-  var allResults = [];
-  var sortState = { col: 'date', dir: 'desc' };
-
-  function updateSortIndicators(){
-    document.querySelectorAll('#resultsTable th').forEach(function(th){
-      var col = th.getAttribute('data-col');
-      var arrow = th.querySelector('.sort-arrow');
-      if(col === sortState.col){
-        th.classList.add('sorted');
-        arrow.textContent = sortState.dir === 'asc' ? '↑' : '↓';
-      } else {
-        th.classList.remove('sorted');
-        arrow.textContent = '↕';
-      }
+      result.push(cur);
+      return result;
+    };
+    const header = parseLine(lines[0]).map(h => h.trim().toLowerCase());
+    return lines.slice(1).filter(l => l.trim().length).map(line => {
+      const cells = parseLine(line);
+      const obj = {};
+      header.forEach((h,i) => obj[h] = (cells[i]||'').trim());
+      return obj;
     });
   }
-
-  function parseCsv(text){
-    var lines = text.split(/\r?\n/).filter(function(l){ return l.trim().length > 0; });
-    if(lines.length <= 1) return [];
-    var rows = [];
-    for(var i = 1; i < lines.length; i++){
-      var fields = parseCsvLine(lines[i]);
-      if(fields.length < 5) continue;
-      var row = {
-        date: fields[0].trim(),
-        name: fields[1].trim(),
-        checklist: parseInt(fields[2], 10) || 0,
-        quiz: parseInt(fields[3], 10) || 0,
-        time: parseInt(fields[4], 10) || 0
-      };
-      if(row.name) rows.push(row);
-    }
-    return rows;
+  function fractionToPct(str){
+    const m = String(str).match(/(\d+)\s*(?:из|\/)\s*(\d+)/i);
+    if(!m) return null;
+    return Math.round((parseInt(m[1],10)/parseInt(m[2],10))*100);
   }
-
-  function parseCsvLine(line){
-    var result = [];
-    var cur = '';
-    var inQuotes = false;
-    for(var i = 0; i < line.length; i++){
-      var ch = line[i];
-      if(inQuotes){
-        if(ch === '"'){
-          if(line[i+1] === '"'){ cur += '"'; i++; }
-          else { inQuotes = false; }
-        } else {
-          cur += ch;
-        }
-      } else {
-        if(ch === '"'){ inQuotes = true; }
-        else if(ch === ','){ result.push(cur); cur = ''; }
-        else { cur += ch; }
-      }
-    }
-    result.push(cur);
-    return result;
-  }
-
-  function getPillClass(value, max){
-    var ratio = max > 0 ? value / max : 0;
-    if(ratio >= 0.8) return 'good';
-    if(ratio >= 0.5) return 'mid';
+  function pillClass(pct){
+    if(pct === null) return '';
+    if(pct >= 80) return 'good';
+    if(pct >= 50) return 'mid';
     return 'bad';
   }
-
-  var DEMO_RESULTS = [
-    { date: '06.07.2026', name: 'Ахметова Дана Ержановна', checklist: 7, quiz: 4, time: 14 },
-    { date: '06.07.2026', name: 'Ибраев Ерлан Саматович', checklist: 6, quiz: 3, time: 19 },
-    { date: '05.07.2026', name: 'Смагулова Айгерим Болатовна', checklist: 7, quiz: 4, time: 16 },
-    { date: '05.07.2026', name: 'Ким Виктор Сергеевич', checklist: 4, quiz: 2, time: 23 },
-    { date: '03.07.2026', name: 'Нурланова Салтанат Оспановна', checklist: 5, quiz: 3, time: 18 },
-    { date: '01.07.2026', name: 'Жумабеков Асхат Талгатович', checklist: 3, quiz: 1, time: 21 }
-  ];
-
-  function isSheetConfigured(){
-    return CONFIG.SHEET_CSV_URL.indexOf('ВАШ_ID_ТАБЛИЦЫ') === -1;
-  }
-
-  function fetchResults(){
-    var tbody = document.getElementById('resultsTbody');
-    var emptyEl = document.getElementById('adminEmpty');
-    var errorEl = document.getElementById('adminError');
-    var demoBanner = document.getElementById('adminDemoBanner');
-    errorEl.hidden = true;
-    emptyEl.hidden = true;
-
-    if(!isSheetConfigured()){
-      demoBanner.hidden = false;
-      allResults = DEMO_RESULTS.slice();
-      renderStats();
-      renderTable();
-      return;
-    }
-    demoBanner.hidden = true;
-
-    var cacheBustUrl = CONFIG.SHEET_CSV_URL + (CONFIG.SHEET_CSV_URL.indexOf('?') > -1 ? '&' : '?') + '_=' + Date.now();
-
-    fetch(cacheBustUrl)
-      .then(function(r){
-        if(!r.ok) throw new Error('Network response was not ok');
-        return r.text();
-      })
-      .then(function(text){
-        allResults = parseCsv(text);
-        renderStats();
-        renderTable();
-      })
-      .catch(function(){
-        errorEl.hidden = false;
-        tbody.innerHTML = '';
-      });
-  }
-
-  function renderStats(){
-    var count = allResults.length;
-    document.getElementById('statCount').textContent = count;
-
-    if(count === 0){
-      document.getElementById('statAvgQuiz').textContent = '—';
-      document.getElementById('statFullChecklist').textContent = '—';
-      document.getElementById('statAvgTime').textContent = '—';
-      return;
-    }
-
-    var avgQuizPct = Math.round(allResults.reduce(function(sum, r){ return sum + (r.quiz / 4 * 100); }, 0) / count);
-    var fullChecklistPct = Math.round(allResults.filter(function(r){ return r.checklist >= 7; }).length / count * 100);
-    var avgTime = Math.round(allResults.reduce(function(sum, r){ return sum + r.time; }, 0) / count);
-
-    document.getElementById('statAvgQuiz').textContent = avgQuizPct + '%';
-    document.getElementById('statFullChecklist').textContent = fullChecklistPct + '%';
-    document.getElementById('statAvgTime').textContent = avgTime + ' мин';
-  }
-
-  function renderTable(){
-    var tbody = document.getElementById('resultsTbody');
-    var emptyEl = document.getElementById('adminEmpty');
-    var query = document.getElementById('searchInput').value.trim().toLowerCase();
-
-    var filtered = allResults.filter(function(r){
-      return r.name.toLowerCase().indexOf(query) !== -1;
+  function renderAdmin(){
+    const tbody = document.getElementById('tableBody');
+    const search = document.getElementById('searchInput').value.trim().toLowerCase();
+    let list = rows.filter(r => (r['имя']||'').toLowerCase().includes(search));
+    list.sort((a,b) => {
+      const key = sortKey === 'date' ? 'дата' : sortKey === 'name' ? 'имя' : sortKey === 'checklist' ? 'чек-лист' : sortKey === 'quiz' ? 'квиз' : 'время';
+      return (a[key]||'').localeCompare(b[key]||'', 'ru') * sortDir;
     });
+    tbody.innerHTML = '';
+    list.forEach(r => {
+      const checklistPct = fractionToPct(r['чек-лист']);
+      const quizPct = fractionToPct(r['квиз']);
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${r['дата']||'—'}</td><td><b>${r['имя']||'—'}</b></td><td><span class="pill ${pillClass(checklistPct)}">${r['чек-лист']||'—'}</span></td><td><span class="pill ${pillClass(quizPct)}">${r['квиз']||'—'}</span></td><td>${r['время']||'—'}</td>`;
+      tbody.appendChild(tr);
+    });
+    document.getElementById('emptyMsg').style.display = list.length ? 'none' : 'block';
 
-    filtered.sort(function(a, b){
-      var col = sortState.col;
-      var va = a[col], vb = b[col];
-      if(col === 'name' || col === 'date'){
-        va = String(va).toLowerCase();
-        vb = String(vb).toLowerCase();
-        if(va < vb) return sortState.dir === 'asc' ? -1 : 1;
-        if(va > vb) return sortState.dir === 'asc' ? 1 : -1;
-        return 0;
+    document.getElementById('statCount').textContent = rows.length;
+    const quizPcts = rows.map(r => fractionToPct(r['квиз'])).filter(v => v !== null);
+    const checklistFull = rows.filter(r => {
+      const m = String(r['чек-лист']||'').match(/(\d+)\s*(?:из|\/)\s*(\d+)/i);
+      return m && m[1] === m[2];
+    }).length;
+    const times = rows.map(r => parseFloat(r['время'])).filter(v => !isNaN(v));
+    document.getElementById('statQuiz').textContent = quizPcts.length ? Math.round(quizPcts.reduce((a,b)=>a+b,0)/quizPcts.length)+'%' : '—';
+    document.getElementById('statChecklist').textContent = rows.length ? Math.round((checklistFull/rows.length)*100)+'%' : '—';
+    document.getElementById('statTime').textContent = times.length ? Math.round(times.reduce((a,b)=>a+b,0)/times.length)+' мин' : '—';
+  }
+  async function fetchCsvText(url){
+    // Прямая попытка (работает, если Google отдаёт CORS-заголовки для этого документа)
+    try {
+      const res = await fetch(url, { cache: 'no-store' });
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+      const text = await res.text();
+      if(text.trim().startsWith('<')) throw new Error('Пришла HTML-страница вместо CSV — проверьте формат публикации');
+      return text;
+    } catch(directErr){
+      // Запасной способ — через прокси, в обход ограничения CORS браузера
+      try {
+        const proxied = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
+        const res2 = await fetch(proxied, { cache: 'no-store' });
+        if(!res2.ok) throw new Error('HTTP ' + res2.status);
+        return await res2.text();
+      } catch(proxyErr){
+        throw new Error('Прямой запрос: ' + directErr.message + ' · Через прокси: ' + proxyErr.message);
       }
-      return sortState.dir === 'asc' ? va - vb : vb - va;
-    });
+    }
+  }
 
-    if(filtered.length === 0){
-      tbody.innerHTML = '';
-      emptyEl.hidden = false;
+  async function loadAdminData(){
+    if(SHEET_CSV_URL.includes('ВСТАВЬТЕ')){
+      document.getElementById('configNote').style.display = 'block';
+      document.getElementById('loadingMsg').style.display = 'none';
+      document.getElementById('emptyMsg').style.display = 'block';
       return;
     }
-    emptyEl.hidden = true;
+    document.getElementById('configNote').style.display = 'none';
+    document.getElementById('loadingMsg').style.display = 'block';
+    document.getElementById('emptyMsg').style.display = 'none';
+    document.getElementById('emptyMsg').textContent = 'Пока никто не прошёл обучение — результаты появятся здесь автоматически.';
+    try {
+      const url = SHEET_CSV_URL + (SHEET_CSV_URL.includes('?') ? '&' : '?') + 'cachebust=' + Date.now();
+      const text = await fetchCsvText(url);
+      rows = parseCSV(text);
+    } catch(err){
+      rows = [];
+      document.getElementById('loadingMsg').style.display = 'none';
+      document.getElementById('emptyMsg').style.display = 'block';
+      document.getElementById('emptyMsg').textContent = 'Не удалось загрузить данные. ' + err.message;
+      return;
+    }
+    document.getElementById('loadingMsg').style.display = 'none';
+    renderAdmin();
+  }
+  document.getElementById('searchInput').addEventListener('input', renderAdmin);
+  document.getElementById('refreshBtn').addEventListener('click', loadAdminData);
+  document.querySelectorAll('th[data-key]').forEach(th => {
+    th.addEventListener('click', () => {
+      const key = th.dataset.key;
+      sortDir = (sortKey === key) ? -sortDir : -1;
+      sortKey = key;
+      renderAdmin();
+    });
+  });
 
-    tbody.innerHTML = filtered.map(function(r){
-      var checklistPill = getPillClass(r.checklist, 7);
-      var quizPill = getPillClass(r.quiz, 4);
-      return '<tr>' +
-        '<td>' + escapeHtml(r.date) + '</td>' +
-        '<td>' + escapeHtml(r.name) + '</td>' +
-        '<td>' + r.checklist + '/7 <span class="pill ' + checklistPill + '">' + Math.round(r.checklist/7*100) + '%</span></td>' +
-        '<td>' + r.quiz + '/4 <span class="pill ' + quizPill + '">' + Math.round(r.quiz/4*100) + '%</span></td>' +
-        '<td>' + r.time + ' мин</td>' +
-        '</tr>';
-    }).join('');
+  /* ---------------------------------------------------------
+     ПЕРЕКЛЮЧЕНИЕ МЕЖДУ ОБУЧЕНИЕМ И АДМИН-ПАНЕЛЬЮ
+     --------------------------------------------------------- */
+  function showTraining(){
+    document.getElementById('adminView').style.display = 'none';
+    document.getElementById('trainingView').style.display = 'block';
+    document.getElementById('adminFab').style.display = 'flex';
+  }
+  function showAdmin(){
+    document.getElementById('trainingView').style.display = 'none';
+    document.getElementById('adminView').style.display = 'block';
+    document.getElementById('adminFab').style.display = 'none';
+    loadAdminData();
+  }
+  function tryOpenAdmin(){
+    const code = window.prompt('Код доступа к панели администратора:');
+    if(code === null) return; // нажали "Отмена"
+    if(code.trim() === ADMIN_PASSCODE){
+      history.pushState({}, '', '?admin=1');
+      showAdmin();
+    } else {
+      alert('Неверный код доступа');
+    }
   }
 
-  function escapeHtml(str){
-    var div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
+  document.getElementById('openAdminLink').addEventListener('click', tryOpenAdmin);
+  document.getElementById('adminFab').addEventListener('click', tryOpenAdmin);
 
-  updateSortIndicators();
-})();
+  const params = new URLSearchParams(location.search);
+  if(params.get('admin') === '1') tryOpenAdmin(); else showTraining();
 </script>
+
 </body>
 </html>
