@@ -26,6 +26,9 @@
   }
   *{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
+  .brand-header{ background:#fff; border-bottom:1px solid var(--line); }
+  .brand-header-inner{ max-width:var(--maxw-admin); margin:0 auto; padding:14px 20px; display:flex; align-items:center; }
+  .brand-logo{ height:34px; width:auto; display:block; }
   body{
     margin:0; background: var(--bg); color: var(--ink);
     font-family:'Inter',-apple-system,sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;
@@ -213,6 +216,12 @@
 </style>
 </head>
 <body>
+
+<header class="brand-header">
+  <div class="brand-header-inner">
+    <img src="assets/kazakhtelecom-logo.png" alt="Казахтелеком" class="brand-logo">
+  </div>
+</header>
 
 <!-- ===================== ОБУЧЕНИЕ (для менеджеров) ===================== -->
 <div id="trainingView">
