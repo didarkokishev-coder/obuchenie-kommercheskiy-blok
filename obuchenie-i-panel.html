@@ -175,6 +175,15 @@
   .pill.mid{ background:var(--warn-tint); color:#96661C; }
   .pill.bad{ background:var(--danger-tint); color:var(--danger); }
   .empty, .loading{ text-align:center; padding:60px 20px; color:var(--ink-soft); font-size:14px; }
+  .details-btn{ font-family:'Inter'; font-size:12.5px; font-weight:700; color:var(--accent-deep); background:var(--accent-tint); border:none; padding:6px 12px; border-radius:100px; cursor:pointer; }
+  .details-btn:hover{ background:var(--accent); color:#fff; }
+  .details-row td{ background:#FAFCFC; padding:16px 20px; }
+  .wrong-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .wrong-list li{ font-size:13px; }
+  .wrong-list .wq{ font-weight:700; color:var(--ink); margin-bottom:3px; }
+  .wrong-list .wa{ color:var(--danger); }
+  .wrong-list .wc{ color:var(--accent-deep); }
+  .no-errors{ font-size:13px; color:var(--accent-deep); font-weight:600; }
   .config-note{ background:var(--warn-tint); border:1px solid #EBD3A4; color:#7A5417; border-radius:var(--radius); padding:16px 18px; font-size:13px; margin-bottom:22px; }
   .config-note code{ background:#fff; padding:2px 6px; border-radius:6px; font-size:12px; }
 
@@ -216,17 +225,17 @@
         <div class="progress-seg" data-seg="2"><i></i></div>
         <div class="progress-seg" data-seg="3"><i></i></div>
       </div>
-      <div class="progress-time" id="progressTime">~20 мин осталось</div>
+      <div class="progress-time" id="progressTime">~25 мин осталось</div>
     </div>
   </div>
 
   <section class="hero wrap" id="sec-hero">
     <div class="eyebrow">Обучение · Коммерческий блок</div>
     <h1>Стандарт сервиса и техника продаж</h1>
-    <p class="lead">Короткий курс для новых и действующих менеджеров по продажам. За 20 минут — освежите стандарт обслуживания клиентов и ключевые приёмы продаж, которые пригодятся уже на следующем звонке.</p>
+    <p class="lead">Короткий курс для новых и действующих менеджеров по продажам. За 25 минут — освежите стандарт обслуживания клиентов, ключевые приёмы продаж и знание тарифов, которые пригодятся уже на следующем звонке.</p>
 
     <div class="hero-meta">
-      <div class="meta-chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>4 блока · ~20 минут</div>
+      <div class="meta-chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>4 блока · ~25 минут</div>
       <div class="meta-chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Результат увидит ваш ментор</div>
     </div>
 
@@ -283,40 +292,15 @@
   </section>
 
   <section class="wrap" id="sec-finish" data-seg="3">
-    <div class="eyebrow">Блок 4 · ~4 мин</div>
+    <div class="eyebrow">Блок 4 · ~9 мин</div>
     <h2>Проверьте себя</h2>
-    <p>Выберите один вариант ответа в каждом вопросе — это и есть ваш финальный тест.</p>
-    <div class="quiz" id="quiz">
-      <div class="quiz-item" data-correct="1">
-        <div class="quiz-q">1. За сколько секунд нужно поприветствовать клиента?</div>
-        <div class="quiz-options">
-          <button class="quiz-option">До 10 секунд</button><button class="quiz-option">До 30 секунд</button><button class="quiz-option">В течение минуты</button><button class="quiz-option">Строгих рамок нет</button>
-        </div>
-      </div>
-      <div class="quiz-item" data-correct="1">
-        <div class="quiz-q">2. Что нужно сделать до презентации решения?</div>
-        <div class="quiz-options">
-          <button class="quiz-option">Сразу предложить самый дорогой тариф</button><button class="quiz-option">Выявить потребность клиента через вопросы</button><button class="quiz-option">Рассказать про все акции компании</button><button class="quiz-option">Согласовать скидку с руководителем</button>
-        </div>
-      </div>
-      <div class="quiz-item" data-correct="1">
-        <div class="quiz-q">3. Как правильно реагировать на возражение клиента?</div>
-        <div class="quiz-options">
-          <button class="quiz-option">Сразу переубедить его фактами</button><button class="quiz-option">Признать возражение, уточнить, затем ответить по существу</button><button class="quiz-option">Предложить перезвонить позже</button><button class="quiz-option">Согласиться и закончить разговор</button>
-        </div>
-      </div>
-      <div class="quiz-item" data-correct="1">
-        <div class="quiz-q">4. Через сколько дней стоит сделать контрольный звонок после подключения?</div>
-        <div class="quiz-options">
-          <button class="quiz-option">В тот же день</button><button class="quiz-option">Через 3–5 дней</button><button class="quiz-option">Через месяц</button><button class="quiz-option">Звонок не требуется</button>
-        </div>
-      </div>
-    </div>
+    <p>20 вопросов по продуктам, тарифам и регламентам компании. Выберите один вариант ответа в каждом вопросе — это и есть ваш финальный тест.</p>
+    <div class="quiz" id="quiz"></div>
 
     <div class="results-card">
       <h3 style="font-size:16px;">Ваш результат</h3>
       <div class="results-row"><span>Чек-лист обслуживания</span><b id="resChecklist">0 из 7</b></div>
-      <div class="results-row"><span>Финальный тест</span><b id="resQuiz">0 из 4</b></div>
+      <div class="results-row"><span>Финальный тест</span><b id="resQuiz">0 из 20</b></div>
       <div class="results-row"><span>Время на странице</span><b id="resTime">0 мин</b></div>
       <div class="submit-row">
         <button class="btn" id="submitBtn">Отправить результат
@@ -375,7 +359,7 @@
     <div class="table-card">
       <table id="resultsTable">
         <thead><tr>
-          <th data-key="date">Дата</th><th data-key="name">Имя</th><th data-key="checklist">Чек-лист</th><th data-key="quiz">Тест</th><th data-key="time">Время</th>
+          <th data-key="date">Дата</th><th data-key="name">Имя</th><th data-key="checklist">Чек-лист</th><th data-key="quiz">Тест</th><th data-key="time">Время</th><th>Ошибки в тесте</th>
         </tr></thead>
         <tbody id="tableBody"></tbody>
       </table>
@@ -395,6 +379,33 @@
   const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/13dWhLcNG4v_ZvUCco6HUX560nofFI2V33VDlTSc7u-c/gviz/tq?tqx=out:csv&gid=0";
   // 3) Код доступа для админ-панели (это не настоящая защита, а простой фильтр от случайных заходов)
   const ADMIN_PASSCODE = "1234";
+
+  /* ---------------------------------------------------------
+     ВОПРОСЫ ФИНАЛЬНОГО ТЕСТА (options[0] — не обязательно верный;
+     correct — индекс верного варианта в массиве options)
+     --------------------------------------------------------- */
+  const QUIZ_QUESTIONS = [
+    { q: "Что обязан сделать Абонент при утрате оборудования, переданного во временное пользование?", options: ["Возместить полную стоимость оборудования или расходы на ремонт", "Ничего, оборудование застраховано компанией автоматически", "Заплатить фиксированный штраф в размере 5000 тенге"], correct: 0 },
+    { q: "На сколько дней предоставляется скидка на линейку тарифов Baige Kcell 5G с контрактом на 1 год?", options: ["14 календарных дней", "30 календарных дней", "60 календарных дней"], correct: 1 },
+    { q: "За сколько дней Оператор обязан уведомить Абонента об изменении условий Договора?", options: ["Не менее чем за 30 календарных дней", "Не менее чем за 10 календарных дней", "Не менее чем за 5 рабочих дней"], correct: 0 },
+    { q: "Для каких технологий услуга временного отключения ШПД не применяется?", options: ["FTTh и ETTh", "LTE и FWA", "Только для юридических лиц"], correct: 1 },
+    { q: "Какая скорость интернета в пакете «Go Smart»?", options: ["До 100 Мбит/с", "До 500 Мбит/с", "До 200 Мбит/с"], correct: 2 },
+    { q: "Стоимость аренды оборудования 5G MT-C с 11 мая 2026 года?", options: ["1000 тенге", "2000 тенге", "3000 тенге"], correct: 1 },
+    { q: "Можно ли подключать пакет ТВ Sportline абонентам, не имеющим ШПД от Казахтелеком?", options: ["Нет, только вместе с интернетом от Казахтелеком", "Да, подключение доступно без услуги ШПД", "Да, но только с доплатой 1000 тенге"], correct: 1 },
+    { q: "Какая задолженность погашается раньше при недостаточности внесённых средств?", options: ["Текущая задолженность", "Задолженность за оборудование", "Просроченная задолженность"], correct: 2 },
+    { q: "Какой номер указан для обращения при сбоях в работе услуг?", options: ["150", "160", "130"], correct: 1 },
+    { q: "Стоимость «Интернет 200 new» без контракта с 26.01.2026?", options: ["9 999 ₸", "5 999 ₸", "7 999 ₸"], correct: 2 },
+    { q: "На каких абонентов не распространяется услуга «Временное отключение услуг»?", options: ["Обслуживающихся в рамках пакетных тарифных планов", "Физических лиц", "Абонентов с задолженностью"], correct: 0 },
+    { q: "Сколько SIM-карт входит в тариф «Мега Акционный»?", options: ["2 SIM-карты", "1 SIM-карта", "4 SIM-карты"], correct: 1 },
+    { q: "Предельная скорость по технологии ETTh составляет:", options: ["1 Гбит/с", "50 Мбит/с", "100 Мбит/с"], correct: 2 },
+    { q: "Какой цифровой канал пришёл на смену Личному кабинету на сайте telecom.kz для физических лиц?", options: ["Портал eGov.kz", "Приложение Telecom.kz", "Личный кабинет остался без изменений"], correct: 1 },
+    { q: "В какой срок восстанавливается доступ к услугам после погашения задолженности?", options: ["В течение 24 часов", "Мгновенно, без задержек", "Не позднее 3 часов"], correct: 2 },
+    { q: "Какие подарки предоставляются к пакету «Go Smart»?", options: ["Денежный бонус на баланс", "Устройства потребительской электроники по утверждённому перечню договора", "Бесплатный месяц связи"], correct: 1 },
+    { q: "Через какой сервис Абонент может самостоятельно управлять услугами Казахтелеком?", options: ["Только через звонок в контакт-центр", "Через личный визит в офис продаж", "Через приложение Telecom.kz"], correct: 2 },
+    { q: "Для каких абонентов предназначена акция «Интернет 100 Action, Интернет 200 Action»?", options: ["Только для абонентов с действующим ШПД", "Абоненты без услуги ШПД за последние 3 месяца, без задолженности; новые абоненты", "Для всех абонентов без ограничений"], correct: 1 },
+    { q: "Какой размер пени начисляется за просрочку оплаты услуг?", options: ["0,1% за каждый день просрочки", "Фиксированная сумма 500 тенге", "0,75% за каждый день просрочки"], correct: 2 },
+    { q: "С какой целью в системе CRM 2.0 указывается причина «Переход на НЛТ 2026»?", options: ["Для автоматического повышения тарифа абонента", "Для исключения доначислений за досрочное расторжение контракта при переключении абонентов с НЛТ 2025 на НЛТ 2026", "Для формирования ежемесячного отчёта отдела продаж"], correct: 1 }
+  ];
 
   /* ---------------------------------------------------------
      ОБУЧЕНИЕ
@@ -424,27 +435,54 @@
   });
 
   let quizCorrect = 0;
-  const quizItems = document.querySelectorAll('.quiz-item');
-  const quizTotal = quizItems.length;
-  quizItems.forEach(item => {
-    const correctIdx = parseInt(item.dataset.correct, 10);
-    const options = item.querySelectorAll('.quiz-option');
-    options.forEach((opt, idx) => {
-      opt.addEventListener('click', () => {
+  const quizTotal = QUIZ_QUESTIONS.length;
+  const quizAnswers = new Array(quizTotal).fill(-1); // индекс выбранного варианта на исходный вопрос, -1 = не отвечено
+  const quizContainer = document.getElementById('quiz');
+
+  QUIZ_QUESTIONS.forEach((question, qIdx) => {
+    const order = question.options.map((_, i) => i);
+    for(let i = order.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+    const item = document.createElement('div');
+    item.className = 'quiz-item';
+    const qEl = document.createElement('div');
+    qEl.className = 'quiz-q';
+    qEl.textContent = `${qIdx + 1}. ${question.q}`;
+    const optsEl = document.createElement('div');
+    optsEl.className = 'quiz-options';
+    const buttons = order.map(origIdx => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-option';
+      btn.textContent = question.options[origIdx];
+      btn.dataset.origIdx = origIdx;
+      optsEl.appendChild(btn);
+      return btn;
+    });
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
         if(item.classList.contains('answered')) return;
         item.classList.add('answered');
-        options.forEach(o => o.disabled = true);
-        options[correctIdx].classList.add('correct');
-        if(idx === correctIdx) quizCorrect++; else opt.classList.add('wrong');
+        const chosenIdx = parseInt(btn.dataset.origIdx, 10);
+        buttons.forEach(b => {
+          b.disabled = true;
+          if(parseInt(b.dataset.origIdx, 10) === question.correct) b.classList.add('correct');
+        });
+        if(chosenIdx === question.correct) quizCorrect++; else btn.classList.add('wrong');
+        quizAnswers[qIdx] = chosenIdx;
         document.getElementById('resQuiz').textContent = `${quizCorrect} из ${quizTotal}`;
       });
     });
+    item.appendChild(qEl);
+    item.appendChild(optsEl);
+    quizContainer.appendChild(item);
   });
 
   const segSections = document.querySelectorAll('[data-seg]');
   const segBars = document.querySelectorAll('.progress-seg');
   const timeEl = document.getElementById('progressTime');
-  const timeLeftBySeg = ['~15 мин осталось','~10 мин осталось','~5 мин осталось','Почти готово'];
+  const timeLeftBySeg = ['~19 мин осталось','~14 мин осталось','~9 мин осталось','Почти готово'];
 
   function updateProgress(){
     if(document.getElementById('trainingView').style.display === 'none') return;
@@ -461,7 +499,7 @@
         segBar.style.width = Math.round((passed/total)*100) + '%';
       } else segBar.style.width = '0%';
     });
-    timeEl.textContent = currentIdx === -1 ? '~20 мин осталось' : timeLeftBySeg[currentIdx];
+    timeEl.textContent = currentIdx === -1 ? '~25 мин осталось' : timeLeftBySeg[currentIdx];
     const minutes = Math.max(1, Math.round((Date.now() - startTime) / 60000));
     document.getElementById('resTime').textContent = `${minutes} мин`;
   }
@@ -489,7 +527,7 @@
     }
     const doneCount = document.querySelectorAll('.check-item.done').length;
     const timeSpentSec = Math.round((Date.now() - startTime) / 1000);
-    const payload = { name, checklistDone: doneCount, checklistTotal, quizCorrect, quizTotal, timeSpentSec, completedAt: new Date().toISOString() };
+    const payload = { name, checklistDone: doneCount, checklistTotal, quizCorrect, quizTotal, quizAnswers: quizAnswers.join(','), timeSpentSec, completedAt: new Date().toISOString() };
 
     submitBtn.disabled = true;
     submitStatus.textContent = 'Отправка...';
@@ -545,6 +583,23 @@
     if(pct >= 50) return 'mid';
     return 'bad';
   }
+  function parseWrongAnswers(answersStr){
+    if(!answersStr) return [];
+    const indices = answersStr.split(',').map(v => parseInt(v.trim(), 10));
+    const wrong = [];
+    indices.forEach((chosenIdx, qIdx) => {
+      const question = QUIZ_QUESTIONS[qIdx];
+      if(!question) return;
+      if(chosenIdx === question.correct) return;
+      wrong.push({
+        n: qIdx + 1,
+        q: question.q,
+        chosen: (chosenIdx >= 0 && question.options[chosenIdx]) ? question.options[chosenIdx] : 'не отвечено',
+        correctText: question.options[question.correct]
+      });
+    });
+    return wrong;
+  }
   function renderAdmin(){
     const tbody = document.getElementById('tableBody');
     const search = document.getElementById('searchInput').value.trim().toLowerCase();
@@ -554,12 +609,38 @@
       return (a[key]||'').localeCompare(b[key]||'', 'ru') * sortDir;
     });
     tbody.innerHTML = '';
-    list.forEach(r => {
+    list.forEach((r, i) => {
       const checklistPct = fractionToPct(r['чек-лист']);
       const quizPct = fractionToPct(r['квиз']);
+      const wrongCount = parseWrongAnswers(r['ответы']).length;
+      const rowId = 'details-' + i;
       const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${r['дата']||'—'}</td><td><b>${r['имя']||'—'}</b></td><td><span class="pill ${pillClass(checklistPct)}">${r['чек-лист']||'—'}</span></td><td><span class="pill ${pillClass(quizPct)}">${r['квиз']||'—'}</span></td><td>${r['время']||'—'}</td>`;
+      tr.innerHTML = `<td>${r['дата']||'—'}</td><td><b>${r['имя']||'—'}</b></td><td><span class="pill ${pillClass(checklistPct)}">${r['чек-лист']||'—'}</span></td><td><span class="pill ${pillClass(quizPct)}">${r['квиз']||'—'}</span></td><td>${r['время']||'—'}</td><td>${r['ответы'] ? `<button class="details-btn" data-target="${rowId}">${wrongCount ? wrongCount + ' ошибок' : 'Без ошибок'}</button>` : '—'}</td>`;
       tbody.appendChild(tr);
+      if(r['ответы']){
+        const detailsTr = document.createElement('tr');
+        detailsTr.id = rowId;
+        detailsTr.className = 'details-row';
+        detailsTr.style.display = 'none';
+        const td = document.createElement('td');
+        td.colSpan = 6;
+        const wrong = parseWrongAnswers(r['ответы']);
+        if(wrong.length === 0){
+          td.innerHTML = '<span class="no-errors">Все вопросы теста отвечены верно</span>';
+        } else {
+          td.innerHTML = '<ul class="wrong-list">' + wrong.map(w =>
+            `<li><div class="wq">${w.n}. ${w.q}</div><div class="wa">Ответил: ${w.chosen}</div><div class="wc">Правильно: ${w.correctText}</div></li>`
+          ).join('') + '</ul>';
+        }
+        detailsTr.appendChild(td);
+        tbody.appendChild(detailsTr);
+      }
+    });
+    tbody.querySelectorAll('.details-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const row = document.getElementById(btn.dataset.target);
+        row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
+      });
     });
     document.getElementById('emptyMsg').style.display = list.length ? 'none' : 'block';
 
